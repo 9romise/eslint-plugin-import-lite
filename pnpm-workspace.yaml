@@ -1,0 +1,17 @@
+catalogs:
+  dev:
+    '@types/node': ^24.0.1
+    '@vida0905/eslint-config': ^2.3.0
+    eslint: ^9.28.0
+    nano-staged: ^0.8.0
+    simple-git-hooks: ^2.13.0
+    tinyglobby: ^0.2.14
+    tsdown: ^0.12.7
+    tsx: ^4.20.2
+    typescript: ^5.8.3
+  prod:
+    '@typescript-eslint/utils': ^8.34.0
+  test:
+    '@typescript-eslint/parser': ^8.34.0
+    eslint-vitest-rule-tester: ^2.2.0
+    vitest: ^3.2.3

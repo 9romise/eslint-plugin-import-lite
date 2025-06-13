@@ -1,0 +1,62 @@
+{
+  "name": "eslint-plugin-import-lite",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.12.1",
+  "author": "Vida Xie<https://github.com/9romise>",
+  "license": "MIT",
+  "homepage": "https://github.com/9romise/eslint-plugin-import-lite#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9romise/eslint-plugin-import-lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/9romise/eslint-plugin-import-lite/issues"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "test": "vitest",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "catalog:prod"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:dev",
+    "@typescript-eslint/parser": "catalog:test",
+    "@vida0905/eslint-config": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-vitest-rule-tester": "catalog:test",
+    "nano-staged": "catalog:dev",
+    "simple-git-hooks": "catalog:dev",
+    "tinyglobby": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vitest": "catalog:test"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx nano-staged"
+  },
+  "nano-staged": {
+    "*": "eslint --fix"
+  }
+}
