@@ -53,8 +53,7 @@ export function createRule<
       ...meta,
       docs: {
         ...meta.docs,
-        url: `https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/${name}.md`,
-        // url: `https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/${name}/README.md`,
+        url: `https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/${name}/README.md`,
       },
     } as any,
   }
