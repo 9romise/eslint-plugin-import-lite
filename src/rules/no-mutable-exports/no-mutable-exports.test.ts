@@ -1,7 +1,6 @@
 import type { MessageId, Options } from './no-mutable-exports'
 import type { TestCaseError } from '~/test-utils'
 import { run } from '~/test-utils'
-import { languageOptionsForBabel } from '~/test-utils/parser-babel'
 import rule from './no-mutable-exports'
 
 function createNoMutableError(kind: string): TestCaseError<MessageId> {
@@ -30,14 +29,7 @@ run<Options, MessageId>({
     { code: 'class Counter {}\nexport { Counter as Count }' },
     { code: 'class Counter {}\nexport default Counter' },
     { code: 'class Counter {}\nexport { Counter as default }' },
-    {
-      code: 'export Something from "./something";',
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: 'type Foo = {}\nexport type {Foo}',
-      languageOptions: languageOptionsForBabel,
-    },
+
     {
       code: 'const count = 1\nexport { count as "counter" }',
       languageOptions: {

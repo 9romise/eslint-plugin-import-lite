@@ -40,10 +40,6 @@
     "@typescript-eslint/utils": "catalog:prod"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "catalog:test",
-    "@babel/plugin-syntax-decorators": "catalog:test",
-    "@babel/plugin-syntax-export-default-from": "catalog:test",
-    "@babel/plugin-syntax-typescript": "catalog:test",
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
     "@vida0905/eslint-config": "catalog:dev",

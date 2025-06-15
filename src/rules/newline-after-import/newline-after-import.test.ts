@@ -1,6 +1,5 @@
 import type { MessageId, RuleOptions } from './newline-after-import'
 import { run } from '~/test-utils'
-import { languageOptionsForBabel } from '~/test-utils/parser-babel'
 import rule from './newline-after-import'
 
 function createImportError(count: number) {
@@ -326,26 +325,6 @@ run<RuleOptions, MessageId>({
       languageOptions: {
         parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
       },
-    },
-    {
-      code: `//issue 592
-        export default
-        @SomeDecorator(require('./some-file'))
-        class App {}
-      `,
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `var foo = require('foo');\n\n@SomeDecorator(foo)\nclass Foo {}`,
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `// issue 1004\nimport foo from 'foo';\n\n@SomeDecorator(foo)\nexport default class Test {}`,
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `// issue 1004\nconst foo = require('foo');\n\n@SomeDecorator(foo)\nexport default class Test {}`,
-      languageOptions: languageOptionsForBabel,
     },
 
     {
@@ -757,77 +736,7 @@ run<RuleOptions, MessageId>({
         parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
       },
     },
-    {
-      code: `import foo from 'foo';\n@SomeDecorator(foo)\nclass Foo {}`,
-      output: `import foo from 'foo';\n\n@SomeDecorator(foo)\nclass Foo {}`,
-      errors: [
-        {
-          line: 1,
-          column: 1,
-          ...IMPORT_ERROR,
-        },
-      ],
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `var foo = require('foo');\n@SomeDecorator(foo)\nclass Foo {}`,
-      output: `var foo = require('foo');\n\n@SomeDecorator(foo)\nclass Foo {}`,
-      errors: [
-        {
-          line: 1,
-          column: 1,
-          ...REQUIRE_ERROR,
-        },
-      ],
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `// issue 10042\nimport foo from 'foo';\n@SomeDecorator(foo)\nexport default class Test {}`,
-      output: `// issue 10042\nimport foo from 'foo';\n\n@SomeDecorator(foo)\nexport default class Test {}`,
-      errors: [
-        {
-          line: 2,
-          column: 1,
-          ...IMPORT_ERROR,
-        },
-      ],
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `// issue 1004\nconst foo = require('foo');\n@SomeDecorator(foo)\nexport default class Test {}`,
-      output: `// issue 1004\nconst foo = require('foo');\n\n@SomeDecorator(foo)\nexport default class Test {}`,
-      errors: [
-        {
-          line: 2,
-          column: 1,
-          ...REQUIRE_ERROR,
-        },
-      ],
-      languageOptions: languageOptionsForBabel,
-    },
-    {
-      code: `
-        // issue 1784
-        import { map } from 'rxjs/operators';
-        @Component({})
-        export class Test {}
-      `,
-      output: `
-        // issue 1784
-        import { map } from 'rxjs/operators';
 
-        @Component({})
-        export class Test {}
-      `,
-      errors: [
-        {
-          line: 3,
-          column: 9,
-          ...IMPORT_ERROR,
-        },
-      ],
-      languageOptions: languageOptionsForBabel,
-    },
     {
       code: `import foo from 'foo';\n\nexport default function() {};`,
       output: `import foo from 'foo';\n\n\nexport default function() {};`,
