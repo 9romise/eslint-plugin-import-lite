@@ -27,7 +27,6 @@ export default createRule<[Options?], MessageId>({
   meta: {
     type: 'suggestion',
     docs: {
-      fixable: true,
       description: 'Ensure all imports appear before other statements.',
     },
     fixable: 'code',

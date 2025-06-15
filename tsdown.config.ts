@@ -17,14 +17,7 @@ export default defineConfig([
       index: 'src/index.ts',
       ...Object.fromEntries(rulesEntry.map((file) => [`rules/${basename(dirname(file))}`, file])),
     },
-    outputOptions: {
-      chunkFileNames(info) {
-        if (info.moduleIds.length === 1 && info.moduleIds[0].includes('rules')) {
-          return 'rules/[name].js'
-        }
-        return '[name].js'
-      },
-    },
+    hash: false,
     shims: true,
     format: 'esm',
   },

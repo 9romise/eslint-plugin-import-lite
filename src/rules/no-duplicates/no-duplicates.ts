@@ -384,7 +384,6 @@ export default createRule<Options, MessageId>({
     type: 'problem',
     docs: {
       recommended: true,
-      fixable: true,
       description: 'Forbid repeated import of the same module in multiple places.',
     },
     fixable: 'code',

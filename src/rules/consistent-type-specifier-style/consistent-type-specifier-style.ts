@@ -33,7 +33,6 @@ export default createRule<Options, MessageId>({
   meta: {
     type: 'suggestion',
     docs: {
-      fixable: true,
       description: 'Enforce or ban the use of inline type-only markers for named imports.',
     },
     fixable: 'code',

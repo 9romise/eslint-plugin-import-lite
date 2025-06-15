@@ -19,7 +19,7 @@ function generateConfig(name: string, filter?: (ruleName: string, rule: ESLintRu
       },
     },
     rules: Object.fromEntries(
-      ruleMeta.map((ruleName) => [`${pluginName}/${ruleName}`, 'error']),
+      ruleMeta.map(([ruleName]) => [`${pluginName}/${ruleName}`, 'error']),
     ),
   }
 }
@@ -29,9 +29,7 @@ export default {
   configs: {
     recommended: generateConfig(
       'recommended',
-      ([_, rule]) =>
-        // @ts-expect-error - defined in ~/utils/index createRule
-        rule.meta?.recommended,
+      (_, rule) => !!rule.meta?.docs?.recommended,
     ),
     all: generateConfig('all'),
   },

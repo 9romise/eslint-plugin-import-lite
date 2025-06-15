@@ -13,7 +13,6 @@ export interface ESLintRuleModule<
 
 interface TDocs {
   recommended?: boolean
-  fixable?: boolean
 }
 
 export function createRule<
@@ -33,9 +32,7 @@ export function createRule<
   },
 ): ESLintRuleModule<TOptions, TMessageIds> {
   return {
-    create: ((
-      context: Readonly<RuleContext<TMessageIds, TOptions>>,
-    ): RuleListener => {
+    create: ((context: Readonly<RuleContext<TMessageIds, TOptions>>): RuleListener => {
       const optionsCount = Math.max(context.options.length, defaultOptions.length)
       const optionsWithDefault = Array.from(
         { length: optionsCount },
