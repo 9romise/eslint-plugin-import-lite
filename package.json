@@ -36,6 +36,7 @@
     "build": "tsdown",
     "test": "vitest",
     "lint": "eslint .",
+    "update": "tsx scripts/update && eslint . --fix",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
@@ -49,6 +50,7 @@
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
     "@vida0905/eslint-config": "catalog:dev",
+    "change-case": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-vitest-rule-tester": "catalog:test",
     "nano-staged": "catalog:dev",

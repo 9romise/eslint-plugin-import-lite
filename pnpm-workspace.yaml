@@ -2,6 +2,7 @@ catalogs:
   dev:
     '@types/node': ^24.0.1
     '@vida0905/eslint-config': ^2.3.0
+    change-case: ^5.4.4
     eslint: ^9.28.0
     nano-staged: ^0.8.0
     simple-git-hooks: ^2.13.0
