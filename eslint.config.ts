@@ -1,4 +1,5 @@
 import { defineConfig } from '@vida0905/eslint-config'
+import importLite from 'eslint-plugin-import-lite'
 
 export default defineConfig({
   pnpm: true,
@@ -7,4 +8,6 @@ export default defineConfig({
   rules: {
     'no-console': 'off',
   },
+}).append({
+  ...importLite.configs.recommended,
 })

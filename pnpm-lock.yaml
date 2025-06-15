@@ -75,6 +75,9 @@ importers:
       eslint:
         specifier: catalog:dev
         version: 9.28.0(jiti@2.4.2)
+      eslint-plugin-import-lite:
+        specifier: workspace:*
+        version: 'link:'
       eslint-vitest-rule-tester:
         specifier: catalog:test
         version: 2.2.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)(vitest@3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(jiti@2.4.2)(tsx@4.20.2)(yaml@2.8.0))

@@ -7,21 +7,24 @@ const recommendedRules: Linter.RulesRecord = Object.fromEntries(
   Object.keys(rules).map((ruleName) => [`${pluginName}/${ruleName}`, 'error']),
 )
 
+const recommendedConfig = {
+  plugins: {
+    [pluginName]: {
+      name: pluginName,
+      rules,
+    },
+  },
+  rules: recommendedRules,
+} satisfies Linter.Config
+
+const allConfig = {
+  ...recommendedConfig,
+}
+
 export default {
   rules: rules satisfies ESLint.Plugin['rules'],
   configs: {
-    'recommended': {
-      plugins: {
-        [pluginName]: {
-          name: pluginName,
-          rules,
-        },
-      },
-      rules: recommendedRules,
-    } satisfies Linter.Config,
-    'recommended-legacy': {
-      plugins: [pluginName],
-      rules: recommendedRules,
-    } satisfies Linter.LegacyConfig,
+    recommended: recommendedConfig,
+    all: allConfig,
   },
 }

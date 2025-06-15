@@ -38,7 +38,7 @@
     "lint": "eslint .",
     "update": "tsx scripts/update && eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0"
@@ -52,6 +52,7 @@
     "@vida0905/eslint-config": "catalog:dev",
     "change-case": "catalog:dev",
     "eslint": "catalog:dev",
+    "eslint-plugin-import-lite": "workspace:*",
     "eslint-vitest-rule-tester": "catalog:test",
     "nano-staged": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
