@@ -9,6 +9,8 @@ export const languageOptionsForBabel = {
     babelOptions: {
       plugins: [
         ['@babel/plugin-syntax-decorators', { version: 'legacy' }],
+        ['@babel/plugin-syntax-export-default-from'],
+        ['@babel/plugin-syntax-typescript'],
       ],
     },
   },

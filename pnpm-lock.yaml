@@ -44,6 +44,12 @@ catalogs:
     '@babel/plugin-syntax-decorators':
       specifier: ^7.27.1
       version: 7.27.1
+    '@babel/plugin-syntax-export-default-from':
+      specifier: ^7.27.1
+      version: 7.27.1
+    '@babel/plugin-syntax-typescript':
+      specifier: ^7.27.1
+      version: 7.27.1
     '@typescript-eslint/parser':
       specifier: ^8.34.0
       version: 8.34.0
@@ -66,6 +72,12 @@ importers:
         specifier: catalog:test
         version: 7.27.5(@babel/core@7.27.4)(eslint@9.28.0(jiti@2.4.2))
       '@babel/plugin-syntax-decorators':
+        specifier: catalog:test
+        version: 7.27.1(@babel/core@7.27.4)
+      '@babel/plugin-syntax-export-default-from':
+        specifier: catalog:test
+        version: 7.27.1(@babel/core@7.27.4)
+      '@babel/plugin-syntax-typescript':
         specifier: catalog:test
         version: 7.27.1(@babel/core@7.27.4)
       '@types/node':
@@ -227,6 +239,18 @@ packages:
 
   '@babel/plugin-syntax-decorators@7.27.1':
     resolution: {integrity: sha512-YMq8Z87Lhl8EGkmb0MwYkt36QnxC+fzCgrl66ereamPlYToRpIk5nUjKUY3QKLWq8mwUB1BgbeXcTJhZOCDg5A==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
+  '@babel/plugin-syntax-export-default-from@7.27.1':
+    resolution: {integrity: sha512-eBC/3KSekshx19+N40MzjWqJd7KTEdOoLesAfa4IDFI8eRz5a47i5Oszus6zG/cwIXN63YhgLOMSSNJx49sENg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
+  '@babel/plugin-syntax-typescript@7.27.1':
+    resolution: {integrity: sha512-xfYCBMxveHrRMnAWl1ZlPXOZjzkN82THFvLhQhFXFt81Z5HnN+EtUkZhv/zcKpmT3fzmWZB0ywiBrbC3vogbwQ==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2320,6 +2344,16 @@ snapshots:
       '@babel/types': 7.27.6
 
   '@babel/plugin-syntax-decorators@7.27.1(@babel/core@7.27.4)':
+    dependencies:
+      '@babel/core': 7.27.4
+      '@babel/helper-plugin-utils': 7.27.1
+
+  '@babel/plugin-syntax-export-default-from@7.27.1(@babel/core@7.27.4)':
+    dependencies:
+      '@babel/core': 7.27.4
+      '@babel/helper-plugin-utils': 7.27.1
+
+  '@babel/plugin-syntax-typescript@7.27.1(@babel/core@7.27.4)':
     dependencies:
       '@babel/core': 7.27.4
       '@babel/helper-plugin-utils': 7.27.1

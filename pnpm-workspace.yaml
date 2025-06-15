@@ -17,3 +17,5 @@ catalogs:
     '@typescript-eslint/parser': ^8.34.0
     eslint-vitest-rule-tester: ^2.2.0
     vitest: ^3.2.3
+    '@babel/plugin-syntax-export-default-from': ^7.27.1
+    '@babel/plugin-syntax-typescript': ^7.27.1
