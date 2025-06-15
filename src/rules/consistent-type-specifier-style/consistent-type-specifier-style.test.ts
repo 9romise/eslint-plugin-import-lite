@@ -1,8 +1,9 @@
+import type { MessageId, Options } from './consistent-type-specifier-style'
 import { AST_NODE_TYPES } from '@typescript-eslint/utils'
 import { $, run } from '~/utils/test'
 import rule from './consistent-type-specifier-style'
 
-run({
+run<Options, MessageId>({
   name: 'consistent-type-specifier-style',
   rule,
   valid: [

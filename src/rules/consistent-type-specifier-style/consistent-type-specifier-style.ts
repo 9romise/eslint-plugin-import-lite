@@ -3,27 +3,10 @@ import { isCommaToken } from '@typescript-eslint/utils/ast-utils'
 import { createRule } from '~/utils'
 import { getValue } from '~/utils/ast'
 
-function removeSpecifiers(
-  fixes: TSESLint.RuleFix[],
-  fixer: TSESLint.RuleFixer,
-  sourceCode: Readonly<TSESLint.SourceCode>,
-  specifiers: TSESTree.ImportSpecifier[],
-) {
-  for (const specifier of specifiers) {
-    // remove the trailing comma
-    const token = sourceCode.getTokenAfter(specifier)
-    if (token && isCommaToken(token)) {
-      fixes.push(fixer.remove(token))
-    }
-    fixes.push(fixer.remove(specifier))
-  }
-}
-
 function getImportText(
   node: TSESTree.ImportDeclaration,
   sourceCode: Readonly<TSESLint.SourceCode>,
   specifiers: TSESTree.ImportSpecifier[],
-  kind: 'type' | 'typeof',
 ) {
   const sourceString = sourceCode.getText(node.source)
   if (specifiers.length === 0) {
@@ -38,12 +21,12 @@ function getImportText(
     return `${importedName} as ${s.local.name}`
   })
   // insert a fresh top-level import
-  return `import ${kind} {${names.join(', ')}} from ${sourceString};`
+  return `import type {${names.join(', ')}} from ${sourceString};`
 }
 
 export type Options = ['prefer-inline' | 'prefer-top-level']
 
-type MessageId = 'inline' | 'topLevel'
+export type MessageId = 'inline' | 'topLevel'
 
 export default createRule<Options, MessageId>({
   name: 'consistent-type-specifier-style',
@@ -62,10 +45,8 @@ export default createRule<Options, MessageId>({
       },
     ],
     messages: {
-      inline:
-        'Prefer using inline {{kind}} specifiers instead of a top-level {{kind}}-only import.',
-      topLevel:
-        'Prefer using a top-level {{kind}}-only import instead of inline {{kind}} specifiers.',
+      inline: 'Prefer using inline {{kind}} specifiers instead of a top-level {{kind}}-only import.',
+      topLevel: 'Prefer using a top-level {{kind}}-only import instead of inline {{kind}} specifiers.',
     },
   },
   defaultOptions: ['prefer-top-level'],
@@ -119,8 +100,6 @@ export default createRule<Options, MessageId>({
         if (
           // already top-level is valid
           node.importKind === 'type'
-          // @ts-expect-error - flow type
-          || node.importKind === 'typeof'
           // no specifiers (import {} from '') cannot have inline - so is valid
           || node.specifiers.length === 0
           || (node.specifiers.length === 1
@@ -133,7 +112,6 @@ export default createRule<Options, MessageId>({
         }
 
         const typeSpecifiers: TSESTree.ImportSpecifier[] = []
-        const typeofSpecifiers: TSESTree.ImportSpecifier[] = []
         const valueSpecifiers: TSESTree.ImportSpecifier[] = []
 
         let defaultSpecifier: TSESTree.ImportDefaultSpecifier | null = null
@@ -151,11 +129,6 @@ export default createRule<Options, MessageId>({
           if (specifier.importKind === 'type') {
             typeSpecifiers.push(specifier)
           } else if (
-            // @ts-expect-error - flow type
-            specifier.importKind === 'typeof'
-          ) {
-            typeofSpecifiers.push(specifier)
-          } else if (
             specifier.importKind === 'value'
             || specifier.importKind == null
           ) {
@@ -167,39 +140,22 @@ export default createRule<Options, MessageId>({
           node,
           sourceCode,
           typeSpecifiers,
-          'type',
         )
-        const typeofImport = getImportText(
-          node,
-          sourceCode,
-          typeofSpecifiers,
-          'typeof',
-        )
-        const newImports = `${typeImport}\n${typeofImport}`.trim()
 
-        if (
-          typeSpecifiers.length + typeofSpecifiers.length
-          === node.specifiers.length
-        ) {
-          // all specifiers have inline specifiers - so we replace the entire import
-          const kind = [
-            typeSpecifiers.length > 0 ? ('type' as const) : [],
-            typeofSpecifiers.length > 0 ? ('typeof' as const) : [],
-          ].flat()
-
+        if (typeSpecifiers.length === node.specifiers.length) {
           context.report({
             node,
             messageId: 'topLevel',
             data: {
-              kind: kind.join('/'),
+              kind: 'type',
             },
             fix(fixer) {
-              return fixer.replaceText(node, newImports)
+              return fixer.replaceText(node, typeImport)
             },
           })
         } else {
           // remove specific specifiers and insert new imports for them
-          for (const specifier of [...typeSpecifiers, ...typeofSpecifiers]) {
+          for (const specifier of typeSpecifiers) {
             context.report({
               node: specifier,
               messageId: 'topLevel',
@@ -215,8 +171,14 @@ export default createRule<Options, MessageId>({
                   // import { Value, type Type } from 'mod';
 
                   // we can just remove the type specifiers
-                  removeSpecifiers(fixes, fixer, sourceCode, typeSpecifiers)
-                  removeSpecifiers(fixes, fixer, sourceCode, typeofSpecifiers)
+                  for (const specifier of typeSpecifiers) {
+                    // remove the trailing comma
+                    const token = sourceCode.getTokenAfter(specifier)
+                    if (token && isCommaToken(token)) {
+                      fixes.push(fixer.remove(token))
+                    }
+                    fixes.push(fixer.remove(specifier))
+                  }
 
                   // make the import nicely formatted by also removing the trailing comma after the last value import
                   // eg
@@ -256,7 +218,7 @@ export default createRule<Options, MessageId>({
                 return [
                   ...fixes,
                   // insert the new imports after the old declaration
-                  fixer.insertTextAfter(node, `\n${newImports}`),
+                  fixer.insertTextAfter(node, `\n${typeImport}`),
                 ]
               },
             })
