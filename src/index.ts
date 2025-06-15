@@ -1,30 +1,38 @@
 import type { ESLint, Linter } from 'eslint'
+import type { ESLintRuleModule } from './utils'
 import { rules } from './rules'
 
 const pluginName = 'import-lite'
 
-const recommendedRules: Linter.RulesRecord = Object.fromEntries(
-  Object.keys(rules).map((ruleName) => [`${pluginName}/${ruleName}`, 'error']),
-)
+function generateConfig(name: string, filter?: (ruleName: string, rule: ESLintRuleModule<unknown[], string>) => boolean): Linter.Config {
+  let ruleMeta = Object.entries(rules).filter(([_, rule]) => !rule.meta?.deprecated)
 
-const recommendedConfig = {
-  plugins: {
-    [pluginName]: {
-      name: pluginName,
-      rules,
+  if (filter)
+    ruleMeta = ruleMeta.filter(([ruleName, rule]) => filter(ruleName, rule))
+
+  return {
+    name: `${pluginName}/${name}`,
+    plugins: {
+      [pluginName]: {
+        name: pluginName,
+        rules,
+      },
     },
-  },
-  rules: recommendedRules,
-} satisfies Linter.Config
-
-const allConfig = {
-  ...recommendedConfig,
+    rules: Object.fromEntries(
+      ruleMeta.map((ruleName) => [`${pluginName}/${ruleName}`, 'error']),
+    ),
+  }
 }
 
 export default {
   rules: rules satisfies ESLint.Plugin['rules'],
   configs: {
-    recommended: recommendedConfig,
-    all: allConfig,
+    recommended: generateConfig(
+      'recommended',
+      ([_, rule]) =>
+        // @ts-expect-error - defined in ~/utils/index createRule
+        rule.meta.recommended,
+    ),
+    all: generateConfig('all'),
   },
 }

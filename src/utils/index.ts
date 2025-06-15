@@ -12,7 +12,8 @@ export interface ESLintRuleModule<
 }
 
 interface TDocs {
-  recommended: boolean
+  recommended?: boolean
+  fixable?: boolean
 }
 
 export function createRule<

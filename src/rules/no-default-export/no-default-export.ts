@@ -9,7 +9,6 @@ export default createRule({
   meta: {
     type: 'suggestion',
     docs: {
-      recommended: true,
       description: 'Forbid default exports.',
     },
     schema: [],

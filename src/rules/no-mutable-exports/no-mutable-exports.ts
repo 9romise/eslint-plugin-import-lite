@@ -9,7 +9,6 @@ export default createRule<Options, MessageId>({
   meta: {
     type: 'suggestion',
     docs: {
-      recommended: true,
       description: 'Forbid the use of mutable exports with `var` or `let`.',
     },
     schema: [],

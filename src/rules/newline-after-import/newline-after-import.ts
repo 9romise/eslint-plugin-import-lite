@@ -93,7 +93,7 @@ export default createRule<RuleOptions, MessageId>({
   meta: {
     type: 'layout',
     docs: {
-      recommended: true,
+      fixable: true,
       description: 'Enforce a newline after import statements.',
     },
     fixable: 'whitespace',
