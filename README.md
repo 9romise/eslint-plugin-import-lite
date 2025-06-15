@@ -4,11 +4,31 @@
 [![npm bundle size][npm-bundle-size-src]][npm-bundle-size-href]
 [![License][license-src]][license-href]
 
-__description__
+## Feature
+
+- Port some useful rules from [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
+- No need resolver and settings in [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
+- Drop babel and flow support.
+
+See all rules in [`src/rules`](./src/rules)
+
+## Motivation
+
+I extend [my own ESLint config](https://github.com/9romise/eslint-config) from [`@antfu/eslint-config`](https://github.com/antfu/eslint-config).
+
+Recently this config dropped [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x) cause it introduce some binary packages and make it heavy.
+
+In a [discussion]((https://github.com/9romise/eslint-import-resolver-oxc/issues/87#issuecomment-2945162572)) about built-in resolver, the maintainer plan to keep it as dependency, which makes it impossible to lightweight the package.
+
+But there are some useful rules and [some people (include me) want to bring the plugin back](https://github.com/antfu/eslint-config/issues/720).
+
+## Credits
+
+[eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x) - [MIT](https://github.com/un-ts/eslint-plugin-import-x/blob/master/LICENSE)
 
 ## License
 
-[MIT](./LICENSE) License &copy; 2024-PRESENT [Vida Xie](https://github.com/9romise)
+[MIT](./LICENSE) License &copy; 2025-PRESENT [Vida Xie](https://github.com/9romise)
 
 <!-- Badges -->
 
