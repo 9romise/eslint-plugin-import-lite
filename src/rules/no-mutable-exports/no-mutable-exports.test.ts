@@ -1,6 +1,6 @@
 import type { MessageId, Options } from './no-mutable-exports'
-import type { TestCaseError } from '~/test-utils'
-import { run } from '~/test-utils'
+import type { TestCaseError } from '~/utils/test'
+import { run } from '~/utils/test'
 import rule from './no-mutable-exports'
 
 function createNoMutableError(kind: string): TestCaseError<MessageId> {

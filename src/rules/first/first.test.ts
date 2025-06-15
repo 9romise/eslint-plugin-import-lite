@@ -1,4 +1,4 @@
-import { $, run } from '~/test-utils'
+import { $, run } from '~/utils/test'
 import rule from './first'
 
 run({

@@ -1,5 +1,5 @@
-import { getValue } from '~/ast-utils'
 import { createRule, sourceType } from '~/utils'
+import { getValue } from '~/utils/ast'
 
 export type RuleOptions = []
 export type MessageIds = 'preferNamed' | 'noAliasDefault'

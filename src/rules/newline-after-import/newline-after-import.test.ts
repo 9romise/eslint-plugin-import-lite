@@ -1,5 +1,5 @@
 import type { MessageId, RuleOptions } from './newline-after-import'
-import { run } from '~/test-utils'
+import { run } from '~/utils/test'
 import rule from './newline-after-import'
 
 function createImportError(count: number) {

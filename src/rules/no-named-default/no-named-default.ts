@@ -1,5 +1,5 @@
-import { getValue } from '~/ast-utils'
 import { createRule } from '~/utils'
+import { getValue } from '~/utils/ast'
 
 export type Options = []
 export type MessageId = 'default'

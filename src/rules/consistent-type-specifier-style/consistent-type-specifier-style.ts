@@ -1,7 +1,7 @@
 import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
 import { isCommaToken } from '@typescript-eslint/utils/ast-utils'
-import { getValue } from '~/ast-utils'
 import { createRule } from '~/utils'
+import { getValue } from '~/utils/ast'
 
 function removeSpecifiers(
   fixes: TSESLint.RuleFix[],

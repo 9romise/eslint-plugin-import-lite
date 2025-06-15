@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/utils'
-import { $, run } from '~/test-utils'
+import { $, run } from '~/utils/test'
 import rule from './consistent-type-specifier-style'
 
 run({
