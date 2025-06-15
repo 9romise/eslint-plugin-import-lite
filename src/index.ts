@@ -31,7 +31,7 @@ export default {
       'recommended',
       ([_, rule]) =>
         // @ts-expect-error - defined in ~/utils/index createRule
-        rule.meta.recommended,
+        rule.meta?.recommended,
     ),
     all: generateConfig('all'),
   },
