@@ -28,6 +28,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+  },
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",
@@ -35,6 +38,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
   },
   "dependencies": {
     "@typescript-eslint/utils": "catalog:prod"
