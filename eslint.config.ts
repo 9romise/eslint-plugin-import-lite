@@ -16,6 +16,23 @@ export default defineConfig({
   rules: {
     'antfu/indent-unindent': 'error',
   },
+}, {
+  files: ['src/**/*.ts'],
+  ignores: ['**/*.test.ts'],
+  rules: {
+    'no-restricted-imports': ['error', {
+      patterns: [
+        {
+          group: ['@typescript-eslint/utils'],
+          importNames: [
+            'AST_NODE_TYPES',
+            'AST_TOKEN_TYPES',
+          ],
+          message: 'Import from "@typescript-eslint/types" instead',
+        },
+      ],
+    }],
+  },
 }).append({
   ...importLite.configs.recommended,
 })

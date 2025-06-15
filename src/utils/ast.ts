@@ -1,11 +1,12 @@
-import { TSESTree } from '@typescript-eslint/utils'
+import type { TSESTree } from '@typescript-eslint/utils'
+import { AST_NODE_TYPES } from '@typescript-eslint/types'
 
 export function getValue(node: TSESTree.Identifier | TSESTree.StringLiteral) {
   switch (node.type) {
-    case TSESTree.AST_NODE_TYPES.Identifier: {
+    case AST_NODE_TYPES.Identifier: {
       return node.name
     }
-    case TSESTree.AST_NODE_TYPES.Literal: {
+    case AST_NODE_TYPES.Literal: {
       return node.value
     }
     default: {

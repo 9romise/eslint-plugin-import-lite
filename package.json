@@ -50,11 +50,13 @@
     }
   },
   "dependencies": {
-    "@typescript-eslint/utils": "catalog:prod"
+    "@eslint-community/eslint-utils": "catalog:prod",
+    "@typescript-eslint/types": "catalog:prod"
   },
   "devDependencies": {
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
+    "@typescript-eslint/utils": "catalog:prod",
     "@vida0905/eslint-config": "catalog:dev",
     "change-case": "catalog:dev",
     "eslint": "catalog:dev",
