@@ -21,12 +21,7 @@ export default createRule<Options, MessageId>({
     return {
       ImportDeclaration(node) {
         for (const im of node.specifiers) {
-          if (
-            'importKind' in im
-            && (im.importKind === 'type'
-              // @ts-expect-error - flow type
-              || im.importKind === 'typeof')
-          ) {
+          if ('importKind' in im && im.importKind === 'type') {
             continue
           }
 
