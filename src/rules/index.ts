@@ -6,6 +6,7 @@ import consistentTypeSpecifierStyle from './consistent-type-specifier-style/cons
 import first from './first/first'
 import newlineAfterImport from './newline-after-import/newline-after-import'
 import noDefaultExport from './no-default-export/no-default-export'
+import noDuplicates from './no-duplicates/no-duplicates'
 import noMutableExports from './no-mutable-exports/no-mutable-exports'
 import noNamedDefault from './no-named-default/no-named-default'
 
@@ -14,6 +15,7 @@ export const rules: Record<string, ESLintRuleModule<unknown[], string>> = {
   'first': first,
   'newline-after-import': newlineAfterImport,
   'no-default-export': noDefaultExport,
+  'no-duplicates': noDuplicates,
   'no-mutable-exports': noMutableExports,
   'no-named-default': noNamedDefault,
 }
