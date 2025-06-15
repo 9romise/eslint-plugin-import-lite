@@ -115,8 +115,8 @@ run({
     {
       code: `if (true) { console.log(1) }import a from 'b'`,
       output: $`
-      import a from 'b'
-      if (true) { console.log(1) }
+        import a from 'b'
+        if (true) { console.log(1) }
       `,
       errors: [{ messageId: 'order' }],
     },

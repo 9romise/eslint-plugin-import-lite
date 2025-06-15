@@ -8,6 +8,14 @@ export default defineConfig({
   rules: {
     'no-console': 'off',
   },
+}, {
+  files: [
+    '**/*.test.{js,ts}',
+  ],
+  name: 'local/test',
+  rules: {
+    'antfu/indent-unindent': 'error',
+  },
 }).append({
   ...importLite.configs.recommended,
 })
