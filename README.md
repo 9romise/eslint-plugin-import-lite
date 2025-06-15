@@ -1,5 +1,8 @@
 # eslint-plugin-import-lite
 
+> [!WARNING]
+> WIP
+
 [![npm version][npm-version-src]][npm-version-href]
 [![npm bundle size][npm-bundle-size-src]][npm-bundle-size-href]
 [![License][license-src]][license-href]
