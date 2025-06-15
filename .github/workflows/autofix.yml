@@ -24,7 +24,6 @@ jobs:
 
       - run: npm i -g @antfu/ni
       - run: nci
-      - run: nr build
       - run: nr lint --fix
 
       - uses: autofix-ci/action@v1.3
