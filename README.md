@@ -27,7 +27,8 @@ But there are some useful rules and [some people (include me) want to bring the 
 
 ## Credits
 
-[eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x) - [MIT](https://github.com/un-ts/eslint-plugin-import-x/blob/master/LICENSE)
+- [eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x) - source codes [MIT](https://github.com/un-ts/eslint-plugin-import-x/blob/master/LICENSE)
+- [eslint-stylistic](https://github.com/eslint-stylistic/eslint-stylistic) - project structure and scripts [MIT](https://github.com/eslint-stylistic/eslint-stylistic/blob/main/LICENSE)
 
 ## License
 
