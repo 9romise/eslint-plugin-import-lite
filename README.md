@@ -1,7 +1,12 @@
 # eslint-plugin-import-lite
 
 > [!WARNING]
+> 
 > WIP
+> 
+> This plugin is still newly born and willing to accept useful import-related rules.
+>
+> Feel free to open an issue to share your ideas!
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm bundle size][npm-bundle-size-src]][npm-bundle-size-href]
