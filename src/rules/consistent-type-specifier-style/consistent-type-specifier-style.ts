@@ -23,7 +23,7 @@ function getImportText(
   return `import type {${names.join(', ')}} from ${sourceString};`
 }
 
-export type Options = ['inline' | 'top-level']
+export type Options = ['inline' | 'top-level' | 'prefer-top-level']
 
 export type MessageId = 'inline' | 'topLevel'
 
@@ -38,7 +38,7 @@ export default createRule<Options, MessageId>({
     schema: [
       {
         type: 'string',
-        enum: ['top-level', 'inline'],
+        enum: ['top-level', 'inline', 'prefer-top-level'],
         default: 'top-level',
       },
     ],
@@ -48,10 +48,10 @@ export default createRule<Options, MessageId>({
     },
   },
   defaultOptions: ['top-level'],
-  create(context) {
+  create(context, [options]) {
     const { sourceCode } = context
 
-    if (context.options[0] === 'inline') {
+    if (options === 'inline') {
       return {
         ImportDeclaration(node) {
           if (node.importKind === 'value' || node.importKind == null) {
@@ -151,7 +151,7 @@ export default createRule<Options, MessageId>({
               return fixer.replaceText(node, typeImport)
             },
           })
-        } else {
+        } else if (options === 'top-level') {
           // remove specific specifiers and insert new imports for them
           for (const specifier of typeSpecifiers) {
             context.report({

@@ -55,6 +55,16 @@ run<Options, MessageId>({
       options: ['top-level'],
     },
 
+    // prefer-top-level
+    {
+      code: `import type { Foo } from 'Foo'`,
+      options: ['prefer-top-level'],
+    },
+    {
+      code: `import { Foo, type Bar } from 'Foo'`,
+      options: ['prefer-top-level'],
+    },
+
     //
     // inline
     //
@@ -194,6 +204,14 @@ run<Options, MessageId>({
       `,
       options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+    },
+
+    // prefer-top-level
+    {
+      code: `import { type Foo, type Bar } from 'Foo';`,
+      output: `import type {Foo, Bar} from 'Foo';`,
+      options: ['prefer-top-level'],
+      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration }],
     },
 
     //
