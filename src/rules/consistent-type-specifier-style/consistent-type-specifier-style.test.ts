@@ -8,115 +8,115 @@ run<Options, MessageId>({
   rule,
   valid: [
     //
-    // prefer-top-level
+    // top-level
     //
     {
       code: 'import Foo from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import type Foo from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import { Foo } from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import { Foo as Bar } from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import * as Foo from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import {} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import type {} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import type { Foo } from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import type { Foo as Bar } from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
     {
       code: 'import type { Foo, Bar, Baz, Bam } from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
     },
 
     //
-    // prefer-inline
+    // inline
     //
     {
       code: 'import Foo from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import type Foo from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import { Foo } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import { Foo as Bar } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import * as Foo from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import {} from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import type {} from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import { type Foo } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import { type Foo as Bar } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
     {
       code: 'import { type Foo, type Bar, Baz, Bam } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
     },
 
     //
     // always valid
     //
-    { code: `import type * as Foo from 'Foo';` },
+    { code: 'import type * as Foo from \'Foo\';' },
   ],
   invalid: [
 
     //
-    // prefer-top-level
+    // top-level
     //
     {
       code: 'import { type Foo } from \'Foo\';',
       output: 'import type {Foo} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [
         {
           messageId: 'topLevel',
@@ -130,7 +130,7 @@ run<Options, MessageId>({
     {
       code: 'import { type Foo as Bar } from \'Foo\';',
       output: 'import type {Foo as Bar} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [
         { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
       ],
@@ -138,7 +138,7 @@ run<Options, MessageId>({
     {
       code: 'import { type Foo, type Bar } from \'Foo\';',
       output: 'import type {Foo, Bar} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [
         { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
       ],
@@ -146,25 +146,25 @@ run<Options, MessageId>({
     {
       code: 'import { Foo, type Bar } from \'Foo\';',
       output: 'import { Foo  } from \'Foo\';\nimport type {Bar} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
       code: 'import { type Foo, Bar } from \'Foo\';',
       output: 'import {  Bar } from \'Foo\';\nimport type {Foo} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
       code: 'import Foo, { type Bar } from \'Foo\';',
       output: 'import Foo from \'Foo\';\nimport type {Bar} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
       code: 'import Foo, { type Bar, Baz } from \'Foo\';',
       output: 'import Foo, {  Baz } from \'Foo\';\nimport type {Bar} from \'Foo\';',
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     // https://github.com/import-js/eslint-plugin-import-x/issues/2753
@@ -192,17 +192,17 @@ run<Options, MessageId>({
           Component5,
         } from "package-2";
       `,
-      options: ['prefer-top-level'],
+      options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
 
     //
-    // prefer-inline
+    // inline
     //
     {
       code: 'import type { Foo } from \'Foo\';',
       output: 'import  { type Foo } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
       errors: [
         {
           messageId: 'inline',
@@ -216,7 +216,7 @@ run<Options, MessageId>({
     {
       code: 'import type { Foo, Bar, Baz } from \'Foo\';',
       output: 'import  { type Foo, type Bar, type Baz } from \'Foo\';',
-      options: ['prefer-inline'],
+      options: ['inline'],
       errors: [{ messageId: 'inline', type: AST_NODE_TYPES.ImportDeclaration }],
     },
   ],
