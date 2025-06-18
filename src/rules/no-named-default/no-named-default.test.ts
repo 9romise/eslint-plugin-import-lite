@@ -1,5 +1,5 @@
 import type { MessageId, Options } from './no-named-default'
-import { AST_NODE_TYPES } from '@typescript-eslint/utils'
+import { AST_NODE_TYPES } from '~/utils/ast'
 import { run, SYNTAX_VALID_CASES } from '~/utils/test'
 import rule from './no-named-default'
 

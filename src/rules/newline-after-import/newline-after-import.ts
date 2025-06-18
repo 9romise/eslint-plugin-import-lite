@@ -1,7 +1,7 @@
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
+import type { Scope, Tree } from '~/types'
 import { createRule } from '~/utils'
 
-function isStaticRequire(node: TSESTree.CallExpression) {
+function isStaticRequire(node: Tree.CallExpression) {
   return (
     node
     && node.callee
@@ -14,8 +14,8 @@ function isStaticRequire(node: TSESTree.CallExpression) {
 }
 
 function containsNodeOrEqual(
-  outerNode: TSESTree.Node,
-  innerNode: TSESTree.Node,
+  outerNode: Tree.Node,
+  innerNode: Tree.Node,
 ) {
   return (
     outerNode.range[0] <= innerNode.range[0]
@@ -23,7 +23,7 @@ function containsNodeOrEqual(
   )
 }
 
-function getScopeBody(scope: TSESLint.Scope.Scope) {
+function getScopeBody(scope: Scope.Scope) {
   if (scope.block.type === 'SwitchStatement') {
     console.log('SwitchStatement scopes not supported')
     return []
@@ -39,28 +39,28 @@ function getScopeBody(scope: TSESLint.Scope.Scope) {
 }
 
 function findNodeIndexInScopeBody(
-  body: TSESTree.ProgramStatement[],
-  nodeToFind: TSESTree.Node,
+  body: Tree.ProgramStatement[],
+  nodeToFind: Tree.Node,
 ) {
   return body.findIndex((node) => containsNodeOrEqual(node, nodeToFind))
 }
 
 function getLineDifference(
-  node: TSESTree.Node,
-  nextNode: TSESTree.Comment | TSESTree.Node,
+  node: Tree.Node,
+  nextNode: Tree.Comment | Tree.Node,
 ) {
   return nextNode.loc.start.line - node.loc.end.line
 }
 
 function isClassWithDecorator(
-  node: TSESTree.Node,
-): node is TSESTree.ClassDeclaration & { decorators: TSESTree.Decorator[] } {
+  node: Tree.Node,
+): node is Tree.ClassDeclaration & { decorators: Tree.Decorator[] } {
   return node.type === 'ClassDeclaration' && !!node.decorators?.length
 }
 
 function isExportDefaultClass(
-  node: TSESTree.Node,
-): node is TSESTree.ExportDefaultDeclaration {
+  node: Tree.Node,
+): node is Tree.ExportDefaultDeclaration {
   return (
     node.type === 'ExportDefaultDeclaration'
     && node.declaration.type === 'ClassDeclaration'
@@ -68,9 +68,9 @@ function isExportDefaultClass(
 }
 
 function isExportNameClass(
-  node: TSESTree.Node,
-): node is TSESTree.ExportNamedDeclaration & {
-  declaration: TSESTree.ClassDeclaration
+  node: Tree.Node,
+): node is Tree.ExportNamedDeclaration & {
+  declaration: Tree.ClassDeclaration
 } {
   return (
     node.type === 'ExportNamedDeclaration'
@@ -119,11 +119,11 @@ export default createRule<RuleOptions, MessageId>({
   create(context, [options]) {
     let level = 0
 
-    const requireCalls: TSESTree.CallExpression[] = []
+    const requireCalls: Tree.CallExpression[] = []
 
     function checkForNewLine(
-      node: TSESTree.Statement,
-      nextNode: TSESTree.Node,
+      node: Tree.Statement,
+      nextNode: Tree.Node,
       type: 'import' | 'require',
     ) {
       if (isExportDefaultClass(nextNode) || isExportNameClass(nextNode)) {
@@ -173,8 +173,8 @@ export default createRule<RuleOptions, MessageId>({
     }
 
     function commentAfterImport(
-      node: TSESTree.Node,
-      nextComment: TSESTree.Comment,
+      node: Tree.Node,
+      nextComment: Tree.Comment,
       type: 'import' | 'require',
     ) {
       const lineDifference = getLineDifference(node, nextComment)
@@ -218,7 +218,7 @@ export default createRule<RuleOptions, MessageId>({
     }
 
     function checkImport(
-      node: TSESTree.ImportDeclaration | TSESTree.TSImportEqualsDeclaration,
+      node: Tree.ImportDeclaration | Tree.TSImportEqualsDeclaration,
     ) {
       const { parent } = node
 
@@ -226,13 +226,13 @@ export default createRule<RuleOptions, MessageId>({
         return
       }
 
-      const root = parent as TSESTree.Program
+      const root = parent as Tree.Program
 
       const nodePosition = root.body.indexOf(node)
       const nextNode = root.body[nodePosition + 1]
       const endLine = node.loc.end.line
 
-      let nextComment: TSESTree.Comment | undefined
+      let nextComment: Tree.Comment | undefined
 
       if (root.comments !== undefined && options.considerComments) {
         nextComment = root.comments.find(

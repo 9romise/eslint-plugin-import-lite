@@ -1,7 +1,7 @@
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
+import type { ReportFixFunction, Tree } from '~/types'
 import { createRule } from '~/utils'
 
-function getImportValue(node: TSESTree.ProgramStatement) {
+function getImportValue(node: Tree.ProgramStatement) {
   return node.type === 'ImportDeclaration'
     ? node.source.value
     : 'moduleReference' in node
@@ -10,7 +10,7 @@ function getImportValue(node: TSESTree.ProgramStatement) {
       && node.moduleReference.expression.value
 }
 
-function isPossibleDirective(node: TSESTree.ProgramStatement) {
+function isPossibleDirective(node: Tree.ProgramStatement) {
   return (
     node.type === 'ExpressionStatement'
     && node.expression.type === 'Literal'
@@ -58,10 +58,10 @@ export default createRule<[Options?], MessageId>({
         let anyExpressions = false
         let anyRelative = false
 
-        let lastLegalImp: TSESTree.ProgramStatement | null = null
+        let lastLegalImp: Tree.ProgramStatement | null = null
 
         const errorInfos: Array<{
-          node: TSESTree.ProgramStatement
+          node: Tree.ProgramStatement
           range: [number, number]
         }> = []
 
@@ -130,7 +130,7 @@ export default createRule<[Options?], MessageId>({
         }
 
         for (const [index, { node }] of errorInfos.entries()) {
-          let fix: TSESLint.ReportFixFunction | undefined
+          let fix: ReportFixFunction | undefined
 
           if (index < lastSortNodesIndex) {
             fix = (fixer) => fixer.insertTextAfter(node, '')

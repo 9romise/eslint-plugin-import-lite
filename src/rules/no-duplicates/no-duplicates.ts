@@ -1,5 +1,4 @@
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
-import type { RuleContext } from '@typescript-eslint/utils/ts-eslint'
+import type { ReportFixFunction, RuleContext, RuleFixer, SourceCode, Tree } from '~/types'
 import { createRule } from '~/utils'
 
 export type Options = [
@@ -11,7 +10,7 @@ export type Options = [
 export type MessageId = 'duplicate'
 
 function checkImports(
-  imported: Map<string, TSESTree.ImportDeclaration[]>,
+  imported: Map<string, Tree.ImportDeclaration[]>,
   context: RuleContext<MessageId, Options>,
 ) {
   imported.forEach((nodes, module) => {
@@ -36,10 +35,10 @@ function checkImports(
 }
 
 function getFix(
-  nodes: TSESTree.ImportDeclaration[],
-  sourceCode: TSESLint.SourceCode,
+  nodes: Tree.ImportDeclaration[],
+  sourceCode: SourceCode,
   context: RuleContext<MessageId, Options>,
-): TSESLint.ReportFixFunction | null {
+): ReportFixFunction | null {
   const first = nodes[0]
 
   // Adjusting the first import might make it multiline, which could break
@@ -73,7 +72,7 @@ function getFix(
 
   const specifiers = restWithoutCommentsAndNamespaces.reduce<
     Array<{
-      importNode: TSESTree.ImportDeclaration
+      importNode: Tree.ImportDeclaration
       identifiers: string[]
       isEmpty: boolean
     }>
@@ -114,7 +113,7 @@ function getFix(
   // pre-caculate preferInline before actual fix function
   const preferInline = context.options[0] && context.options[0]['prefer-inline']
 
-  return (fixer: TSESLint.RuleFixer) => {
+  return (fixer: RuleFixer) => {
     const tokens = sourceCode.getTokens(first)
     const openBrace = tokens.find((token) => isPunctuator(token, '{'))!
     const closeBrace = tokens.find((token) => isPunctuator(token, '}'))!
@@ -287,12 +286,12 @@ function getFix(
   }
 }
 
-function isPunctuator(node: TSESTree.Token, value: '{' | '}' | ',') {
+function isPunctuator(node: Tree.Token, value: '{' | '}' | ',') {
   return node.type === 'Punctuator' && node.value === value
 }
 
 // Get the name of the default import of `node`, if any.
-function getDefaultImportName(node: TSESTree.ImportDeclaration) {
+function getDefaultImportName(node: Tree.ImportDeclaration) {
   const defaultSpecifier = node.specifiers.find(
     (specifier) => specifier.type === 'ImportDefaultSpecifier',
   )
@@ -300,22 +299,22 @@ function getDefaultImportName(node: TSESTree.ImportDeclaration) {
 }
 
 // Checks whether `node` has a namespace import.
-function hasNamespace(node: TSESTree.ImportDeclaration) {
+function hasNamespace(node: Tree.ImportDeclaration) {
   return node.specifiers.some(
     (specifier) => specifier.type === 'ImportNamespaceSpecifier',
   )
 }
 
 // Checks whether `node` has any non-default specifiers.
-function hasSpecifiers(node: TSESTree.ImportDeclaration) {
+function hasSpecifiers(node: Tree.ImportDeclaration) {
   return node.specifiers.some((specifier) => specifier.type === 'ImportSpecifier')
 }
 
 // It's not obvious what the user wants to do with comments associated with
 // duplicate imports, so skip imports with comments when autofixing.
 function hasProblematicComments(
-  node: TSESTree.ImportDeclaration,
-  sourceCode: TSESLint.SourceCode,
+  node: Tree.ImportDeclaration,
+  sourceCode: SourceCode,
 ) {
   return (
     hasCommentBefore(node, sourceCode)
@@ -327,8 +326,8 @@ function hasProblematicComments(
 // Checks whether `node` has a comment (that ends) on the previous line or on
 // the same line as `node` (starts).
 function hasCommentBefore(
-  node: TSESTree.ImportDeclaration,
-  sourceCode: TSESLint.SourceCode,
+  node: Tree.ImportDeclaration,
+  sourceCode: SourceCode,
 ) {
   return sourceCode
     .getCommentsBefore(node)
@@ -338,8 +337,8 @@ function hasCommentBefore(
 // Checks whether `node` has a comment (that starts) on the same line as `node`
 // (ends).
 function hasCommentAfter(
-  node: TSESTree.ImportDeclaration,
-  sourceCode: TSESLint.SourceCode,
+  node: Tree.ImportDeclaration,
+  sourceCode: SourceCode,
 ) {
   return sourceCode
     .getCommentsAfter(node)
@@ -349,8 +348,8 @@ function hasCommentAfter(
 // Checks whether `node` has any comments _inside,_ except inside the `{...}`
 // part (if any).
 function hasCommentInsideNonSpecifiers(
-  node: TSESTree.ImportDeclaration,
-  sourceCode: TSESLint.SourceCode,
+  node: Tree.ImportDeclaration,
+  sourceCode: SourceCode,
 ) {
   const tokens = sourceCode.getTokens(node)
   const openBraceIndex = tokens.findIndex((token) => isPunctuator(token, '{'))
@@ -371,11 +370,11 @@ function hasCommentInsideNonSpecifiers(
 }
 
 export interface ModuleMap {
-  imported: Map<string, TSESTree.ImportDeclaration[]>
-  nsImported: Map<string, TSESTree.ImportDeclaration[]>
-  defaultTypesImported: Map<string, TSESTree.ImportDeclaration[]>
-  namespaceTypesImported: Map<string, TSESTree.ImportDeclaration[]>
-  namedTypesImported: Map<string, TSESTree.ImportDeclaration[]>
+  imported: Map<string, Tree.ImportDeclaration[]>
+  nsImported: Map<string, Tree.ImportDeclaration[]>
+  defaultTypesImported: Map<string, Tree.ImportDeclaration[]>
+  namespaceTypesImported: Map<string, Tree.ImportDeclaration[]>
+  namedTypesImported: Map<string, Tree.ImportDeclaration[]>
 }
 
 export default createRule<Options, MessageId>({
@@ -406,9 +405,9 @@ export default createRule<Options, MessageId>({
   create(context) {
     const preferInline = context.options[0]?.['prefer-inline']
 
-    const moduleMaps = new Map<TSESTree.Node, ModuleMap>()
+    const moduleMaps = new Map<Tree.Node, ModuleMap>()
 
-    function getImportMap(n: TSESTree.ImportDeclaration) {
+    function getImportMap(n: Tree.ImportDeclaration) {
       const parent = n.parent!
       let map: ModuleMap
       if (moduleMaps.has(parent)) {

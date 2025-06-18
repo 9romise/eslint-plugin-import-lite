@@ -17,18 +17,33 @@ export default defineConfig({
     'antfu/indent-unindent': 'error',
   },
 }, {
+  name: 'local/restrict',
   files: ['src/**/*.ts'],
-  ignores: ['**/*.test.ts'],
+  ignores: ['src/?(utils|types)/**/*.ts'],
   rules: {
     'no-restricted-imports': ['error', {
-      patterns: [
+      paths: [
         {
-          group: ['@typescript-eslint/utils'],
-          importNames: [
-            'AST_NODE_TYPES',
-            'AST_TOKEN_TYPES',
-          ],
-          message: 'Import from "@typescript-eslint/types" instead',
+          name: '@typescript-eslint/utils',
+          importNames: ['ASTUtils', 'AST_NODE_TYPES', 'AST_TOKEN_TYPES'],
+          message: 'Import from "~/utils/ast" instead',
+        },
+        {
+          name: '@typescript-eslint/types',
+          message: 'Import from "~/utils/ast" instead',
+        },
+        {
+          name: '@typescript-eslint/utils/ast-utils',
+          message: 'Import from "~/utils/ast" instead',
+        },
+        {
+          name: '@typescript-eslint/utils',
+          importNames: ['TSESLint', 'TSESTree'],
+          message: 'Import from "~/types" instead',
+        },
+        {
+          name: '@typescript-eslint/utils/ts-eslint',
+          message: 'Import from "~/types" instead',
         },
       ],
     }],

@@ -1,4 +1,4 @@
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
+import type { Scope, Tree } from '~/types'
 import { createRule } from '~/utils'
 
 export type MessageId = 'noMutable'
@@ -18,7 +18,7 @@ export default createRule<Options, MessageId>({
   },
   defaultOptions: [],
   create(context) {
-    function checkDeclaration(node: TSESTree.NamedExportDeclarations) {
+    function checkDeclaration(node: Tree.NamedExportDeclarations) {
       if ('kind' in node && (node.kind === 'var' || node.kind === 'let')) {
         context.report({
           node,
@@ -31,7 +31,7 @@ export default createRule<Options, MessageId>({
     }
 
     function checkDeclarationsInScope(
-      { variables }: TSESLint.Scope.Scope,
+      { variables }: Scope.Scope,
       name: string,
     ) {
       for (const variable of variables) {

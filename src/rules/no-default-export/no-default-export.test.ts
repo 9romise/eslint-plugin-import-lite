@@ -1,6 +1,6 @@
 import type { MessageIds, RuleOptions } from './no-default-export'
 import type { TestCaseError } from '~/utils/test'
-import { AST_NODE_TYPES } from '@typescript-eslint/utils'
+import { AST_NODE_TYPES } from '~/utils/ast'
 import { run } from '~/utils/test'
 import rule from './no-default-export'
 

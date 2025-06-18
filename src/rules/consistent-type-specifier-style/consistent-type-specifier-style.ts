@@ -1,12 +1,11 @@
-import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
-import { isCommaToken } from '@typescript-eslint/utils/ast-utils'
+import type { RuleFix, SourceCode, Tree } from '~/types'
 import { createRule } from '~/utils'
-import { getValue } from '~/utils/ast'
+import { getValue, isCommaToken } from '~/utils/ast'
 
 function getImportText(
-  node: TSESTree.ImportDeclaration,
-  sourceCode: Readonly<TSESLint.SourceCode>,
-  specifiers: TSESTree.ImportSpecifier[],
+  node: Tree.ImportDeclaration,
+  sourceCode: Readonly<SourceCode>,
+  specifiers: Tree.ImportSpecifier[],
 ) {
   const sourceString = sourceCode.getText(node.source)
   if (specifiers.length === 0) {
@@ -110,10 +109,10 @@ export default createRule<Options, MessageId>({
           return
         }
 
-        const typeSpecifiers: TSESTree.ImportSpecifier[] = []
-        const valueSpecifiers: TSESTree.ImportSpecifier[] = []
+        const typeSpecifiers: Tree.ImportSpecifier[] = []
+        const valueSpecifiers: Tree.ImportSpecifier[] = []
 
-        let defaultSpecifier: TSESTree.ImportDefaultSpecifier | null = null
+        let defaultSpecifier: Tree.ImportDefaultSpecifier | null = null
 
         for (const specifier of node.specifiers) {
           if (specifier.type === 'ImportDefaultSpecifier') {
@@ -162,7 +161,7 @@ export default createRule<Options, MessageId>({
                 kind: specifier.importKind,
               },
               fix(fixer) {
-                const fixes: TSESLint.RuleFix[] = []
+                const fixes: RuleFix[] = []
 
                 // if there are no value specifiers, then the other report fixer will be called, not this one
 
