@@ -9,8 +9,8 @@
 
 ## Feature
 
-- Port some useful rules from [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
-- No need resolver and settings in [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
+- Port some useful rules that don’t require a resolver from [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
+- No need for a resolver and settings like those in [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
 - Drop babel and flow support.
 
 See all rules in [`src/rules`](./src/rules)
@@ -36,9 +36,9 @@ But there are some useful rules and [some people (include me) want to bring the 
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/eslint-plugin-import-lite
+[npm-version-src]: https://img.shields.io/npm/v/eslint-plugin-import-lite?color=00a3e0
 [npm-version-href]: https://npmjs.com/package/eslint-plugin-import-lite
-[npm-bundle-size-src]: https://img.shields.io/npm/unpacked-size/eslint-plugin-import-lite
+[npm-bundle-size-src]: https://img.shields.io/npm/unpacked-size/eslint-plugin-import-lite?color=00a3e0
 [npm-bundle-size-href]: https://npmjs.com/package/eslint-plugin-import-lite
-[license-src]: https://img.shields.io/npm/l/eslint-plugin-import-lite
+[license-src]: https://img.shields.io/npm/l/eslint-plugin-import-lite?color=00a3e0
 [license-href]: https://opensource.org/licenses/MIT
