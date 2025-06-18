@@ -23,7 +23,7 @@ function getImportText(
   return `import type {${names.join(', ')}} from ${sourceString};`
 }
 
-export type Options = ['prefer-inline' | 'prefer-top-level']
+export type Options = ['inline' | 'top-level' | 'prefer-top-level']
 
 export type MessageId = 'inline' | 'topLevel'
 
@@ -38,8 +38,8 @@ export default createRule<Options, MessageId>({
     schema: [
       {
         type: 'string',
-        enum: ['prefer-top-level', 'prefer-inline'],
-        default: 'prefer-top-level',
+        enum: ['top-level', 'inline', 'prefer-top-level'],
+        default: 'top-level',
       },
     ],
     messages: {
@@ -47,11 +47,11 @@ export default createRule<Options, MessageId>({
       topLevel: 'Prefer using a top-level {{kind}}-only import instead of inline {{kind}} specifiers.',
     },
   },
-  defaultOptions: ['prefer-top-level'],
-  create(context) {
+  defaultOptions: ['top-level'],
+  create(context, [options]) {
     const { sourceCode } = context
 
-    if (context.options[0] === 'prefer-inline') {
+    if (options === 'inline') {
       return {
         ImportDeclaration(node) {
           if (node.importKind === 'value' || node.importKind == null) {
@@ -92,7 +92,7 @@ export default createRule<Options, MessageId>({
       }
     }
 
-    // prefer-top-level
+    // top-level
     return {
       ImportDeclaration(node) {
         if (
@@ -151,7 +151,7 @@ export default createRule<Options, MessageId>({
               return fixer.replaceText(node, typeImport)
             },
           })
-        } else {
+        } else if (options === 'top-level') {
           // remove specific specifiers and insert new imports for them
           for (const specifier of typeSpecifiers) {
             context.report({
