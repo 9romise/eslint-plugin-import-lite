@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.3.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.2.0...v0.3.0) (2025-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* **consistent-type-specifier-style:** rename options ([#4](https://github.com/9romise/eslint-plugin-import-lite/issues/4))
+
+### Features
+
+* **consistent-type-specifier-style:** rename options ([#4](https://github.com/9romise/eslint-plugin-import-lite/issues/4)) ([31547e0](https://github.com/9romise/eslint-plugin-import-lite/commit/31547e0c4e026af997932b2bf846067848e764ec))
+
+
+### Bug Fixes
+
+* **no-named-default:** drop flow ([6ef522c](https://github.com/9romise/eslint-plugin-import-lite/commit/6ef522c7ba72584c9dbb364aecbe80889d06a061))
+
+
+### Build Related
+
+* organize output ([492f7f7](https://github.com/9romise/eslint-plugin-import-lite/commit/492f7f7d46eb5af5905a1fffed842291f3a5d611))
+
+
+### Chores
+
+* release-please-mark ([58e90a5](https://github.com/9romise/eslint-plugin-import-lite/commit/58e90a517896f7c2e8c4ca3fe9eab982b1005d73))
+* restrict imports ([7fe4265](https://github.com/9romise/eslint-plugin-import-lite/commit/7fe42658f44005bf8912618052d371fdbc0e7a36))
+
 ## [0.2.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.1.1...v0.2.0) (2025-06-15)
 
 
