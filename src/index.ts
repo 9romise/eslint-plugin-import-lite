@@ -25,7 +25,7 @@ function generateConfig(name: string, filter?: (ruleName: string, rule: ESLintRu
 }
 
 export default {
-  rules: rules satisfies ESLint.Plugin['rules'],
+  rules,
   configs: {
     recommended: generateConfig(
       'recommended',
@@ -33,4 +33,4 @@ export default {
     ),
     all: generateConfig('all'),
   },
-}
+} satisfies ESLint.Plugin

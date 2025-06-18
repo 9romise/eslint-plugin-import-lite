@@ -1,3 +1,5 @@
+/* eslint perfectionist/sort-objects: "error" */
+
 import { basename, dirname, resolve } from 'node:path'
 import { globSync } from 'tinyglobby'
 import { defineConfig } from 'tsdown'
@@ -8,17 +10,38 @@ const rulesEntry = globSync(`src/rules/**/*.ts`, {
 
 export default defineConfig([
   {
-    clean: true,
-    dts: true,
+    dts: {
+      emitDtsOnly: true,
+    },
+    entry: ['src/index.ts'],
+  },
+  {
     alias: {
       '~': resolve('src'),
     },
-    entry: {
-      index: 'src/index.ts',
-      ...Object.fromEntries(rulesEntry.map((file) => [`rules/${basename(dirname(file))}`, file])),
-    },
-    hash: false,
-    shims: true,
+    clean: true,
+    dts: false,
+    entry: ['src/index.ts'],
     format: 'esm',
+    hash: false,
+    outputOptions: {
+      advancedChunks: {
+        groups: [
+          {
+            name: 'vender',
+            test: 'node_modules',
+          },
+          {
+            name: 'utils',
+            test: 'utils',
+          },
+          ...rulesEntry.map((rule) => ({
+            name: `rules/${basename(dirname(rule))}`,
+            test: rule,
+          })),
+        ],
+      },
+    },
+    shims: true,
   },
 ])
