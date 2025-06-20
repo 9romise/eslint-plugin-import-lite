@@ -38,6 +38,7 @@
     "lint": "eslint .",
     "update": "tsx scripts/update && eslint . --fix",
     "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
     "prepare": "npm run build"
   },
   "peerDependencies": {

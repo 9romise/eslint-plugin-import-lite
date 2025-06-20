@@ -1,4 +1,4 @@
-import type { MessageId, RuleOptions } from './newline-after-import'
+import type { MessageIds, RuleOptions } from './type'
 import { run } from '~/utils/test'
 import rule from './newline-after-import'
 
@@ -28,7 +28,7 @@ function createRequireError(count: number) {
 
 const REQUIRE_ERROR = createRequireError(1)
 
-run<RuleOptions, MessageId>({
+run<RuleOptions, MessageIds>({
   name: 'newline-after-import',
   rule,
   valid: [
