@@ -1,9 +1,9 @@
-import type { MessageId, Options } from './no-named-default'
+import type { MessageIds, RuleOptions } from './type'
 import { AST_NODE_TYPES } from '~/utils/ast'
 import { run, SYNTAX_VALID_CASES } from '~/utils/test'
 import rule from './no-named-default'
 
-run<Options, MessageId>({
+run<RuleOptions, MessageIds>({
   name: 'no-named-default',
   rule,
   valid: [

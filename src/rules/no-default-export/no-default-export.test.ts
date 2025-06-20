@@ -1,4 +1,4 @@
-import type { MessageIds, RuleOptions } from './no-default-export'
+import type { MessageIds, RuleOptions } from './type'
 import type { TestCaseError } from '~/utils/test'
 import { AST_NODE_TYPES } from '~/utils/ast'
 import { run } from '~/utils/test'

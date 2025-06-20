@@ -1,10 +1,8 @@
+import type { MessageIds, RuleOptions } from './type'
 import type { Scope, Tree } from '~/types'
 import { createRule } from '~/utils'
 
-export type MessageId = 'noMutable'
-export type Options = []
-
-export default createRule<Options, MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'no-mutable-exports',
   meta: {
     type: 'suggestion',

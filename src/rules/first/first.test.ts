@@ -1,7 +1,8 @@
+import type { MessageIds, RuleOptions } from './type'
 import { $, run } from '~/utils/test'
 import rule from './first'
 
-run({
+run<RuleOptions, MessageIds>({
   name: 'first',
   rule,
   valid: [

@@ -1,9 +1,9 @@
-import type { MessageId, Options } from './consistent-type-specifier-style'
+import type { MessageIds, RuleOptions } from './type'
 import { AST_NODE_TYPES } from '~/utils/ast'
 import { $, run } from '~/utils/test'
 import rule from './consistent-type-specifier-style'
 
-run<Options, MessageId>({
+run<RuleOptions, MessageIds>({
   name: 'consistent-type-specifier-style',
   rule,
   valid: [

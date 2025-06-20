@@ -1,3 +1,4 @@
+import type { MessageIds, RuleOptions } from './type'
 import type { ReportFixFunction, Tree } from '~/types'
 import { createRule } from '~/utils'
 
@@ -18,11 +19,7 @@ function isPossibleDirective(node: Tree.ProgramStatement) {
   )
 }
 
-export type Options = 'absolute-first' | 'disable-absolute-first'
-
-export type MessageId = 'absolute' | 'order'
-
-export default createRule<[Options?], MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'first',
   meta: {
     type: 'suggestion',

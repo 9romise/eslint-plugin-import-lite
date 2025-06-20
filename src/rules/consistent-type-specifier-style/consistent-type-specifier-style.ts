@@ -1,3 +1,4 @@
+import type { MessageIds, RuleOptions } from './type'
 import type { RuleFix, SourceCode, Tree } from '~/types'
 import { createRule } from '~/utils'
 import { getValue, isCommaToken } from '~/utils/ast'
@@ -23,11 +24,7 @@ function getImportText(
   return `import type {${names.join(', ')}} from ${sourceString};`
 }
 
-export type Options = ['inline' | 'top-level' | 'prefer-top-level']
-
-export type MessageId = 'inline' | 'topLevel'
-
-export default createRule<Options, MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'consistent-type-specifier-style',
   meta: {
     type: 'suggestion',

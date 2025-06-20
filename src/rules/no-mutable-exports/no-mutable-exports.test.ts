@@ -1,13 +1,13 @@
-import type { MessageId, Options } from './no-mutable-exports'
+import type { MessageIds, RuleOptions } from './type'
 import type { TestCaseError } from '~/utils/test'
 import { run } from '~/utils/test'
 import rule from './no-mutable-exports'
 
-function createNoMutableError(kind: string): TestCaseError<MessageId> {
+function createNoMutableError(kind: string): TestCaseError<MessageIds> {
   return { messageId: 'noMutable', data: { kind } }
 }
 
-run<Options, MessageId>({
+run<RuleOptions, MessageIds>({
   name: 'no-mutable-exports',
   rule,
   valid: [

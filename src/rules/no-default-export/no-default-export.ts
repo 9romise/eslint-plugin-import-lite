@@ -1,10 +1,8 @@
+import type { MessageIds, RuleOptions } from './type'
 import { createRule, sourceType } from '~/utils'
 import { getValue } from '~/utils/ast'
 
-export type RuleOptions = []
-export type MessageIds = 'preferNamed' | 'noAliasDefault'
-
-export default createRule({
+export default createRule<RuleOptions, MessageIds>({
   name: 'no-default-export',
   meta: {
     type: 'suggestion',

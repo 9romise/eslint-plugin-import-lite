@@ -1,17 +1,10 @@
+import type { MessageIds, RuleOptions } from './type'
 import type { ReportFixFunction, RuleContext, RuleFixer, SourceCode, Tree } from '~/types'
 import { createRule } from '~/utils'
 
-export type Options = [
-  {
-    'prefer-inline'?: boolean
-  }?,
-]
-
-export type MessageId = 'duplicate'
-
 function checkImports(
   imported: Map<string, Tree.ImportDeclaration[]>,
-  context: RuleContext<MessageId, Options>,
+  context: RuleContext<MessageIds, RuleOptions>,
 ) {
   imported.forEach((nodes, module) => {
     if (nodes.length <= 1) {
@@ -37,7 +30,7 @@ function checkImports(
 function getFix(
   nodes: Tree.ImportDeclaration[],
   sourceCode: SourceCode,
-  context: RuleContext<MessageId, Options>,
+  context: RuleContext<MessageIds, RuleOptions>,
 ): ReportFixFunction | null {
   const first = nodes[0]
 
@@ -377,7 +370,7 @@ export interface ModuleMap {
   namedTypesImported: Map<string, Tree.ImportDeclaration[]>
 }
 
-export default createRule<Options, MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'no-duplicates',
   meta: {
     type: 'problem',

@@ -1,3 +1,4 @@
+import type { MessageIds, RuleOptions } from './type'
 import type { Scope, Tree } from '~/types'
 import { createRule } from '~/utils'
 
@@ -78,17 +79,7 @@ function isExportNameClass(
   )
 }
 
-export type RuleOptions = [
-  {
-    count?: number
-    exactCount?: boolean
-    considerComments?: boolean
-  },
-]
-
-export type MessageId = 'newline'
-
-export default createRule<RuleOptions, MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'newline-after-import',
   meta: {
     type: 'layout',
@@ -117,6 +108,12 @@ export default createRule<RuleOptions, MessageId>({
   },
   defaultOptions: [{ count: 1, exactCount: false, considerComments: false }],
   create(context, [options]) {
+    const {
+      count = 1,
+      exactCount = false,
+      considerComments = false,
+    } = options || {}
+
     let level = 0
 
     const requireCalls: Tree.CallExpression[] = []
@@ -137,11 +134,11 @@ export default createRule<RuleOptions, MessageId>({
       }
 
       const lineDifference = getLineDifference(node, nextNode)
-      const EXPECTED_LINE_DIFFERENCE = options.count! + 1
+      const EXPECTED_LINE_DIFFERENCE = count + 1
 
       if (
         lineDifference < EXPECTED_LINE_DIFFERENCE
-        || (options.exactCount && lineDifference !== EXPECTED_LINE_DIFFERENCE)
+        || (exactCount && lineDifference !== EXPECTED_LINE_DIFFERENCE)
       ) {
         let column = node.loc.start.column
 
@@ -156,12 +153,12 @@ export default createRule<RuleOptions, MessageId>({
           },
           messageId: 'newline',
           data: {
-            count: options.count,
-            lineSuffix: options.count! > 1 ? 's' : '',
+            count,
+            lineSuffix: count! > 1 ? 's' : '',
             type,
           },
           fix:
-            options.exactCount && EXPECTED_LINE_DIFFERENCE < lineDifference
+            exactCount && EXPECTED_LINE_DIFFERENCE < lineDifference
               ? undefined
               : (fixer) =>
                   fixer.insertTextAfter(
@@ -178,7 +175,7 @@ export default createRule<RuleOptions, MessageId>({
       type: 'import' | 'require',
     ) {
       const lineDifference = getLineDifference(node, nextComment)
-      const EXPECTED_LINE_DIFFERENCE = options.count! + 1
+      const EXPECTED_LINE_DIFFERENCE = count! + 1
 
       if (lineDifference < EXPECTED_LINE_DIFFERENCE) {
         let column = node.loc.start.column
@@ -194,12 +191,12 @@ export default createRule<RuleOptions, MessageId>({
           },
           messageId: 'newline',
           data: {
-            count: options.count,
-            lineSuffix: options.count! > 1 ? 's' : '',
+            count,
+            lineSuffix: count! > 1 ? 's' : '',
             type,
           },
           fix:
-            options.exactCount && EXPECTED_LINE_DIFFERENCE < lineDifference
+            exactCount && EXPECTED_LINE_DIFFERENCE < lineDifference
               ? undefined
               : (fixer) =>
                   fixer.insertTextAfter(
@@ -234,11 +231,11 @@ export default createRule<RuleOptions, MessageId>({
 
       let nextComment: Tree.Comment | undefined
 
-      if (root.comments !== undefined && options.considerComments) {
+      if (root.comments !== undefined && considerComments) {
         nextComment = root.comments.find(
           (o) =>
             o.loc.start.line >= endLine
-            && o.loc.start.line <= endLine + options.count! + 1,
+            && o.loc.start.line <= endLine + count! + 1,
         )
       }
 
@@ -298,13 +295,13 @@ export default createRule<RuleOptions, MessageId>({
             if (
               'comments' in statementWithRequireCall.parent
               && statementWithRequireCall.parent.comments !== undefined
-              && options.considerComments
+              && considerComments
             ) {
               const endLine = node.loc.end.line
               nextComment = statementWithRequireCall.parent.comments.find(
                 (o) =>
                   o.loc.start.line >= endLine
-                  && o.loc.start.line <= endLine + options.count! + 1,
+                  && o.loc.start.line <= endLine + count! + 1,
               )
             }
 

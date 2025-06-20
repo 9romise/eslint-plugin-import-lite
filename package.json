@@ -62,6 +62,7 @@
     "eslint": "catalog:dev",
     "eslint-plugin-import-lite": "workspace:*",
     "eslint-vitest-rule-tester": "catalog:test",
+    "json-schema-to-typescript-lite": "catalog:dev",
     "nano-staged": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "tinyglobby": "catalog:dev",

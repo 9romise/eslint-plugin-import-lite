@@ -1,18 +1,18 @@
-import type { MessageId } from './no-duplicates'
+import type { MessageIds, RuleOptions } from './type'
 import type { TestCaseError } from '~/utils/test'
 import { $, run } from '~/utils/test'
 import rule from './no-duplicates'
 
 function createDuplicatedError(
   module: string,
-): TestCaseError<MessageId> {
+): TestCaseError<MessageIds> {
   return {
     messageId: 'duplicate',
     data: { module },
   }
 }
 
-run({
+run<RuleOptions, MessageIds>({
   name: 'no-duplicates',
   rule,
   valid: [
