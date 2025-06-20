@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.3.0...v0.3.1) (2025-06-20)
+
+
+### Chores
+
+* avoid escape ([2a3ea8a](https://github.com/9romise/eslint-plugin-import-lite/commit/2a3ea8afda30cce0463367eac5995bb5f4415e3b))
+
 ## [0.3.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.2.0...v0.3.0) (2025-06-18)
 
 
