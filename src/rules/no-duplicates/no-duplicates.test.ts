@@ -20,7 +20,7 @@ run<RuleOptions, MessageIds>({
       code: 'import "./malformed.js"',
     },
 
-    { code: 'import { x } from \'./foo\'; import { y } from \'./bar\'' },
+    { code: `import { x } from './foo'; import { y } from './bar'` },
 
     // #86: every unresolved module should not show up as 'null' and duplicate
     {
@@ -29,22 +29,22 @@ run<RuleOptions, MessageIds>({
 
     // #1538: It is impossible to import namespace and other in one line, so allow this.
     {
-      code: 'import * as ns from \'./foo\'; import {y} from \'./foo\'',
+      code: `import * as ns from './foo'; import {y} from './foo'`,
     },
     {
-      code: 'import {y} from \'./foo\'; import * as ns from \'./foo\'',
+      code: `import {y} from './foo'; import * as ns from './foo'`,
     },
   ],
   invalid: [
     {
-      code: 'import { x } from \'./foo\'; import { y } from \'./foo\'',
-      output: 'import { x, y  } from \'./foo\'; ',
+      code: `import { x } from './foo'; import { y } from './foo'`,
+      output: `import { x, y  } from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import {y} from \'./foo\'; import { z } from \'./foo\'',
-      output: 'import {x,y, z } from \'./foo\';  ',
+      code: `import {x} from './foo'; import {y} from './foo'; import { z } from './foo'`,
+      output: `import {x,y, z } from './foo';  `,
       errors: [
         createDuplicatedError('./foo'),
         createDuplicatedError('./foo'),
@@ -55,7 +55,7 @@ run<RuleOptions, MessageIds>({
     // #86: duplicate unresolved modules should be flagged
     {
       // Autofix bail because of different default import names.
-      code: 'import foo from \'non-existent\'; import bar from \'non-existent\';',
+      code: `import foo from 'non-existent'; import bar from 'non-existent';`,
       errors: [
         createDuplicatedError('non-existent'),
         createDuplicatedError('non-existent'),
@@ -63,34 +63,34 @@ run<RuleOptions, MessageIds>({
     },
 
     {
-      code: 'import \'./foo\'; import \'./foo\'',
-      output: 'import \'./foo\'; ',
+      code: `import './foo'; import './foo'`,
+      output: `import './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import { x, /* x */ } from \'./foo\'; import {//y\ny//y2\n} from \'./foo\'',
-      output: 'import { x,//y\ny//y2\n /* x */ } from \'./foo\'; ',
+      code: `import { x, /* x */ } from './foo'; import {//y\ny//y2\n} from './foo'`,
+      output: `import { x,//y\ny//y2\n /* x */ } from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import {} from \'./foo\'',
-      output: 'import {x} from \'./foo\'; ',
-      errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
-    },
-
-    // #2347: duplicate identifiers should be removed
-    {
-      code: 'import {a} from \'./foo\'; import { a } from \'./foo\'',
-      output: 'import {a} from \'./foo\'; ',
+      code: `import {x} from './foo'; import {} from './foo'`,
+      output: `import {x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     // #2347: duplicate identifiers should be removed
     {
-      code: 'import {a,b} from \'./foo\'; import { b, c } from \'./foo\'; import {b,c,d} from \'./foo\'',
-      output: 'import {a,b, c ,d} from \'./foo\';  ',
+      code: `import {a} from './foo'; import { a } from './foo'`,
+      output: `import {a} from './foo'; `,
+      errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
+    },
+
+    // #2347: duplicate identifiers should be removed
+    {
+      code: `import {a,b} from './foo'; import { b, c } from './foo'; import {b,c,d} from './foo'`,
+      output: `import {a,b, c ,d} from './foo';  `,
       errors: [
         createDuplicatedError('./foo'),
         createDuplicatedError('./foo'),
@@ -103,13 +103,13 @@ run<RuleOptions, MessageIds>({
       code: $`
         import {a} from './foo'; import { a/*,b*/ } from './foo'
       `,
-      output: 'import {a, a/*,b*/ } from \'./foo\'; ',
+      output: `import {a, a/*,b*/ } from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import {} from \'./foo\'; import {/*c*/} from \'./foo\'; import {y} from \'./foo\'',
-      output: 'import {x/*c*/,y} from \'./foo\';   ',
+      code: `import {x} from './foo'; import {} from './foo'; import {/*c*/} from './foo'; import {y} from './foo'`,
+      output: `import {x/*c*/,y} from './foo';   `,
       errors: [
         createDuplicatedError('./foo'),
         createDuplicatedError('./foo'),
@@ -119,26 +119,26 @@ run<RuleOptions, MessageIds>({
     },
 
     {
-      code: 'import { } from \'./foo\'; import {x} from \'./foo\'',
-      output: 'import {x } from \'./foo\'; ',
+      code: `import { } from './foo'; import {x} from './foo'`,
+      output: `import {x } from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import \'./foo\'; import {x} from \'./foo\'',
-      output: 'import {x} from \'./foo\'; ',
+      code: `import './foo'; import {x} from './foo'`,
+      output: `import {x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import\'./foo\'; import {x} from \'./foo\'',
-      output: 'import {x} from\'./foo\'; ',
+      code: `import'./foo'; import {x} from './foo'`,
+      output: `import {x} from'./foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import \'./foo\'; import { /*x*/} from \'./foo\'; import {//y\n} from \'./foo\'; import {z} from \'./foo\'',
-      output: 'import { /*x*///y\nz} from \'./foo\';   ',
+      code: `import './foo'; import { /*x*/} from './foo'; import {//y\n} from './foo'; import {z} from './foo'`,
+      output: `import { /*x*///y\nz} from './foo';   `,
       errors: [
         createDuplicatedError('./foo'),
         createDuplicatedError('./foo'),
@@ -148,58 +148,58 @@ run<RuleOptions, MessageIds>({
     },
 
     {
-      code: 'import \'./foo\'; import def, {x} from \'./foo\'',
-      output: 'import def, {x} from \'./foo\'; ',
+      code: `import './foo'; import def, {x} from './foo'`,
+      output: `import def, {x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import \'./foo\'; import def from \'./foo\'',
-      output: 'import def from \'./foo\'; ',
+      code: `import './foo'; import def from './foo'`,
+      output: `import def from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import def from \'./foo\'; import {x} from \'./foo\'',
-      output: 'import def, {x} from \'./foo\'; ',
+      code: `import def from './foo'; import {x} from './foo'`,
+      output: `import def, {x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import def from \'./foo\'',
-      output: 'import def, {x} from \'./foo\'; ',
+      code: `import {x} from './foo'; import def from './foo'`,
+      output: `import def, {x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import{x} from \'./foo\'; import def from \'./foo\'',
-      output: 'import def,{x} from \'./foo\'; ',
+      code: `import{x} from './foo'; import def from './foo'`,
+      output: `import def,{x} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import def, {y} from \'./foo\'',
-      output: 'import def, {x,y} from \'./foo\'; ',
+      code: `import {x} from './foo'; import def, {y} from './foo'`,
+      output: `import def, {x,y} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
       // Autofix bail because cannot merge namespace imports.
-      code: 'import * as ns1 from \'./foo\'; import * as ns2 from \'./foo\'',
+      code: `import * as ns1 from './foo'; import * as ns2 from './foo'`,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import * as ns from \'./foo\'; import {x} from \'./foo\'; import {y} from \'./foo\'',
+      code: `import * as ns from './foo'; import {x} from './foo'; import {y} from './foo'`,
       // Autofix could merge some imports, but not the namespace import.
-      output: 'import * as ns from \'./foo\'; import {x,y} from \'./foo\'; ',
+      output: `import * as ns from './foo'; import {x,y} from './foo'; `,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     {
-      code: 'import {x} from \'./foo\'; import * as ns from \'./foo\'; import {y} from \'./foo\'; import \'./foo\'',
+      code: `import {x} from './foo'; import * as ns from './foo'; import {y} from './foo'; import './foo'`,
       // Autofix could merge some imports, but not the namespace import.
-      output: 'import {x,y} from \'./foo\'; import * as ns from \'./foo\';  ',
+      output: `import {x,y} from './foo'; import * as ns from './foo';  `,
       errors: [
         createDuplicatedError('./foo'),
         createDuplicatedError('./foo'),
@@ -343,15 +343,15 @@ import {x,y} from './foo'
 
     // #2027 long import list generate empty lines
     {
-      code: 'import { Foo } from \'./foo\';\nimport { Bar } from \'./foo\';\nexport const value = {}',
-      output: 'import { Foo, Bar  } from \'./foo\';\nexport const value = {}',
+      code: `import { Foo } from './foo';\nimport { Bar } from './foo';\nexport const value = {}`,
+      output: `import { Foo, Bar  } from './foo';\nexport const value = {}`,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
     // #2027 long import list generate empty lines
     {
-      code: 'import { Foo } from \'./foo\';\nimport Bar from \'./foo\';\nexport const value = {}',
-      output: 'import Bar, { Foo } from \'./foo\';\nexport const value = {}',
+      code: `import { Foo } from './foo';\nimport Bar from './foo';\nexport const value = {}`,
+      output: `import Bar, { Foo } from './foo';\nexport const value = {}`,
       errors: [createDuplicatedError('./foo'), createDuplicatedError('./foo')],
     },
 
@@ -465,19 +465,19 @@ run({
   valid: [
     // #1667: ignore duplicate if is a typescript type import
     {
-      code: 'import type { x } from \'./foo\'; import y from \'./foo\'',
+      code: `import type { x } from './foo'; import y from './foo'`,
     },
     {
-      code: 'import type { x } from \'./foo\'; import type * as y from \'./foo\'',
+      code: `import type { x } from './foo'; import type * as y from './foo'`,
     },
     {
-      code: 'import type x from \'./foo\'; import type y from \'./bar\'',
+      code: `import type x from './foo'; import type y from './bar'`,
     },
     {
-      code: 'import type {x} from \'./foo\'; import type {y} from \'./bar\'',
+      code: `import type {x} from './foo'; import type {y} from './bar'`,
     },
     {
-      code: 'import type x from \'./foo\'; import type {y} from \'./foo\'',
+      code: `import type x from './foo'; import type {y} from './foo'`,
     },
     {
       code: `
@@ -499,22 +499,22 @@ run({
       `,
     },
     {
-      code: 'import type { A } from \'foo\';import type B from \'foo\';',
+      code: `import type { A } from 'foo';import type B from 'foo';`,
       options: [{ 'prefer-inline': true }],
     },
     {
-      code: 'import { type A } from \'foo\';import type B from \'foo\';',
+      code: `import { type A } from 'foo';import type B from 'foo';`,
       options: [{ 'prefer-inline': true }],
     },
     {
-      code: 'import type A from \'foo\';import { B } from \'foo\';',
+      code: `import type A from 'foo';import { B } from 'foo';`,
       options: [{ 'prefer-inline': true }],
     },
   ],
 
   invalid: [
     {
-      code: 'import type x from \'./foo\'; import type y from \'./foo\'',
+      code: `import type x from './foo'; import type y from './foo'`,
       errors: [
         {
           ...createDuplicatedError('./foo'),
@@ -529,8 +529,8 @@ run({
       ],
     },
     {
-      code: 'import type x from \'./foo\'; import type x from \'./foo\'',
-      output: 'import type x from \'./foo\'; ',
+      code: `import type x from './foo'; import type x from './foo'`,
+      output: `import type x from './foo'; `,
       errors: [
         {
           ...createDuplicatedError('./foo'),
@@ -545,7 +545,7 @@ run({
       ],
     },
     {
-      code: 'import type {x} from \'./foo\'; import type {y} from \'./foo\'',
+      code: `import type {x} from './foo'; import type {y} from './foo'`,
       output: `import type {x,y} from './foo'; `,
       errors: [
         {
@@ -561,7 +561,7 @@ run({
       ],
     },
     {
-      code: 'import {type x} from \'./foo\'; import type {y} from \'./foo\'',
+      code: `import {type x} from './foo'; import type {y} from './foo'`,
       options: [{ 'prefer-inline': false }],
       output: `import {type x,y} from './foo'; `,
       errors: [
@@ -578,7 +578,7 @@ run({
       ],
     },
     {
-      code: 'import type {x} from \'foo\'; import {type y} from \'foo\'',
+      code: `import type {x} from 'foo'; import {type y} from 'foo'`,
       options: [{ 'prefer-inline': true }],
       output: `import {type x,type y} from 'foo'; `,
       errors: [
@@ -595,7 +595,7 @@ run({
       ],
     },
     {
-      code: 'import {type x} from \'foo\'; import type {y} from \'foo\'',
+      code: `import {type x} from 'foo'; import type {y} from 'foo'`,
       options: [{ 'prefer-inline': true }],
       output: `import {type x,type y} from 'foo'; `,
       errors: [
@@ -612,7 +612,7 @@ run({
       ],
     },
     {
-      code: 'import {type x} from \'foo\'; import type {y} from \'foo\'',
+      code: `import {type x} from 'foo'; import type {y} from 'foo'`,
       output: `import {type x,y} from 'foo'; `,
       errors: [
         {
@@ -628,7 +628,7 @@ run({
       ],
     },
     {
-      code: 'import {type x} from \'./foo\'; import {type y} from \'./foo\'',
+      code: `import {type x} from './foo'; import {type y} from './foo'`,
       options: [{ 'prefer-inline': true }],
       output: `import {type x,type y} from './foo'; `,
       errors: [
@@ -645,7 +645,7 @@ run({
       ],
     },
     {
-      code: 'import {type x} from \'./foo\'; import {type y} from \'./foo\'',
+      code: `import {type x} from './foo'; import {type y} from './foo'`,
       output: `import {type x,type y} from './foo'; `,
       errors: [
         {
@@ -661,7 +661,7 @@ run({
       ],
     },
     {
-      code: 'import {AValue, type x, BValue} from \'./foo\'; import {type y} from \'./foo\'',
+      code: `import {AValue, type x, BValue} from './foo'; import {type y} from './foo'`,
       output: `import {AValue, type x, BValue,type y} from './foo'; `,
       errors: [
         {
@@ -678,7 +678,7 @@ run({
     },
     // #2834 Detect duplicates across type and regular imports
     {
-      code: 'import {AValue} from \'./foo\'; import type {AType} from \'./foo\'',
+      code: `import {AValue} from './foo'; import type {AType} from './foo'`,
       options: [{ 'prefer-inline': true }],
       output: `import {AValue,type AType} from './foo'; `,
       errors: [
@@ -695,7 +695,7 @@ run({
       ],
     },
     {
-      code: 'import type { AType as BType } from \'./foo\'; import { CValue } from \'./foo\'',
+      code: `import type { AType as BType } from './foo'; import { CValue } from './foo'`,
       options: [{ 'prefer-inline': true }],
       output: `import { type AType as BType, CValue  } from './foo'; `,
       errors: [

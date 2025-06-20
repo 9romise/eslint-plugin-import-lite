@@ -10,7 +10,7 @@ export default defineConfig({
   },
 }, {
   files: [
-    '**/*.test.{js,ts}',
+    '**/*.test.ts',
   ],
   name: 'local/test',
   rules: {

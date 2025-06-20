@@ -52,16 +52,16 @@ run<RuleOptions, MessageIds>({
       `,
     },
     {
-      code: `let foo, bar; export { foo, bar }`,
+      code: 'let foo, bar; export { foo, bar }',
     },
     {
-      code: `export const { foo, bar } = item;`,
+      code: 'export const { foo, bar } = item;',
     },
     {
-      code: `export const { foo, bar: baz } = item;`,
+      code: 'export const { foo, bar: baz } = item;',
     },
     {
-      code: `export const { foo: { bar, baz } } = item;`,
+      code: 'export const { foo: { bar, baz } } = item;',
     },
     {
       code: `
@@ -74,10 +74,10 @@ run<RuleOptions, MessageIds>({
       code: `export * from './foo';`,
     },
     {
-      code: `export const { foo } = { foo: "bar" };`,
+      code: 'export const { foo } = { foo: "bar" };',
     },
     {
-      code: `export const { foo: { bar } } = { foo: { bar: "baz" } };`,
+      code: 'export const { foo: { bar } } = { foo: { bar: "baz" } };',
     },
 
     // no exports at all
@@ -154,7 +154,7 @@ run<RuleOptions, MessageIds>({
       errors: [createNoAliasDefaultError('foo', 'ExportNamedDeclaration')],
     },
     {
-      code: 'function foo() { return \'foo\'; }\nexport default foo;',
+      code: `function foo() { return 'foo'; }\nexport default foo;`,
       filename: 'foo.ts',
       errors: [
         {

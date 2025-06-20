@@ -11,47 +11,47 @@ run<RuleOptions, MessageIds>({
     // top-level
     //
     {
-      code: 'import Foo from \'Foo\';',
+      code: `import Foo from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import type Foo from \'Foo\';',
+      code: `import type Foo from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import { Foo } from \'Foo\';',
+      code: `import { Foo } from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import { Foo as Bar } from \'Foo\';',
+      code: `import { Foo as Bar } from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import * as Foo from \'Foo\';',
+      code: `import * as Foo from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import \'Foo\';',
+      code: `import 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import {} from \'Foo\';',
+      code: `import {} from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import type {} from \'Foo\';',
+      code: `import type {} from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import type { Foo } from \'Foo\';',
+      code: `import type { Foo } from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import type { Foo as Bar } from \'Foo\';',
+      code: `import type { Foo as Bar } from 'Foo';`,
       options: ['top-level'],
     },
     {
-      code: 'import type { Foo, Bar, Baz, Bam } from \'Foo\';',
+      code: `import type { Foo, Bar, Baz, Bam } from 'Foo';`,
       options: ['top-level'],
     },
 
@@ -69,54 +69,54 @@ run<RuleOptions, MessageIds>({
     // inline
     //
     {
-      code: 'import Foo from \'Foo\';',
+      code: `import Foo from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import type Foo from \'Foo\';',
+      code: `import type Foo from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import { Foo } from \'Foo\';',
+      code: `import { Foo } from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import { Foo as Bar } from \'Foo\';',
+      code: `import { Foo as Bar } from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import * as Foo from \'Foo\';',
+      code: `import * as Foo from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import \'Foo\';',
+      code: `import 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import {} from \'Foo\';',
+      code: `import {} from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import type {} from \'Foo\';',
+      code: `import type {} from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import { type Foo } from \'Foo\';',
+      code: `import { type Foo } from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import { type Foo as Bar } from \'Foo\';',
+      code: `import { type Foo as Bar } from 'Foo';`,
       options: ['inline'],
     },
     {
-      code: 'import { type Foo, type Bar, Baz, Bam } from \'Foo\';',
+      code: `import { type Foo, type Bar, Baz, Bam } from 'Foo';`,
       options: ['inline'],
     },
 
     //
     // always valid
     //
-    { code: 'import type * as Foo from \'Foo\';' },
+    { code: `import type * as Foo from 'Foo';` },
   ],
   invalid: [
 
@@ -124,8 +124,8 @@ run<RuleOptions, MessageIds>({
     // top-level
     //
     {
-      code: 'import { type Foo } from \'Foo\';',
-      output: 'import type {Foo} from \'Foo\';',
+      code: `import { type Foo } from 'Foo';`,
+      output: `import type {Foo} from 'Foo';`,
       options: ['top-level'],
       errors: [
         {
@@ -138,42 +138,42 @@ run<RuleOptions, MessageIds>({
       ],
     },
     {
-      code: 'import { type Foo as Bar } from \'Foo\';',
-      output: 'import type {Foo as Bar} from \'Foo\';',
+      code: `import { type Foo as Bar } from 'Foo';`,
+      output: `import type {Foo as Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [
         { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
       ],
     },
     {
-      code: 'import { type Foo, type Bar } from \'Foo\';',
-      output: 'import type {Foo, Bar} from \'Foo\';',
+      code: `import { type Foo, type Bar } from 'Foo';`,
+      output: `import type {Foo, Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [
         { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
       ],
     },
     {
-      code: 'import { Foo, type Bar } from \'Foo\';',
-      output: 'import { Foo  } from \'Foo\';\nimport type {Bar} from \'Foo\';',
+      code: `import { Foo, type Bar } from 'Foo';`,
+      output: `import { Foo  } from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
-      code: 'import { type Foo, Bar } from \'Foo\';',
-      output: 'import {  Bar } from \'Foo\';\nimport type {Foo} from \'Foo\';',
+      code: `import { type Foo, Bar } from 'Foo';`,
+      output: `import {  Bar } from 'Foo';\nimport type {Foo} from 'Foo';`,
       options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
-      code: 'import Foo, { type Bar } from \'Foo\';',
-      output: 'import Foo from \'Foo\';\nimport type {Bar} from \'Foo\';',
+      code: `import Foo, { type Bar } from 'Foo';`,
+      output: `import Foo from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
     {
-      code: 'import Foo, { type Bar, Baz } from \'Foo\';',
-      output: 'import Foo, {  Baz } from \'Foo\';\nimport type {Bar} from \'Foo\';',
+      code: `import Foo, { type Bar, Baz } from 'Foo';`,
+      output: `import Foo, {  Baz } from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
     },
@@ -218,8 +218,8 @@ run<RuleOptions, MessageIds>({
     // inline
     //
     {
-      code: 'import type { Foo } from \'Foo\';',
-      output: 'import  { type Foo } from \'Foo\';',
+      code: `import type { Foo } from 'Foo';`,
+      output: `import  { type Foo } from 'Foo';`,
       options: ['inline'],
       errors: [
         {
@@ -232,8 +232,8 @@ run<RuleOptions, MessageIds>({
       ],
     },
     {
-      code: 'import type { Foo, Bar, Baz } from \'Foo\';',
-      output: 'import  { type Foo, type Bar, type Baz } from \'Foo\';',
+      code: `import type { Foo, Bar, Baz } from 'Foo';`,
+      output: `import  { type Foo, type Bar, type Baz } from 'Foo';`,
       options: ['inline'],
       errors: [{ messageId: 'inline', type: AST_NODE_TYPES.ImportDeclaration }],
     },

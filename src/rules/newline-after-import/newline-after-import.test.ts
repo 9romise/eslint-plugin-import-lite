@@ -960,7 +960,7 @@ run<RuleOptions, MessageId>({
         {
           line: 2,
           column: 1,
-          messageId: `newline`,
+          messageId: 'newline',
         },
       ],
       languageOptions: {
@@ -978,7 +978,7 @@ run<RuleOptions, MessageId>({
         {
           line: 1,
           column: 1,
-          messageId: `newline`,
+          messageId: 'newline',
         },
       ],
       languageOptions: {
