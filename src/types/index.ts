@@ -12,3 +12,5 @@ export {
 export {
   TSESTree as Tree,
 }
+
+export type Arrayable<T> = T | T[]
