@@ -1,6 +1,7 @@
 import type { MessageIds, RuleOptions } from './type'
 import type { ReportFixFunction, RuleContext, RuleFixer, SourceCode, Tree } from '~/types'
 import { createRule } from '~/utils'
+import { resolve } from '~/utils/resolve'
 
 function checkImports(
   imported: Map<string, Tree.ImportDeclaration[]>,
@@ -449,7 +450,7 @@ export default createRule<RuleOptions, MessageIds>({
 
     return {
       ImportDeclaration(n) {
-        const resolvedPath = n.source.value
+        const resolvedPath = resolve(n.source.value)
         const importMap = getImportMap(n)
 
         if (importMap.has(resolvedPath)) {
