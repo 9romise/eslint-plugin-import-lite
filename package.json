@@ -52,9 +52,12 @@
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "catalog:prod",
-    "@typescript-eslint/types": "catalog:prod"
+    "@typescript-eslint/types": "catalog:prod",
+    "is-glob": "^4.0.3",
+    "minimatch": "^10.0.3"
   },
   "devDependencies": {
+    "@types/is-glob": "^4.0.4",
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
     "@typescript-eslint/utils": "catalog:prod",
