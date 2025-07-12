@@ -4,7 +4,7 @@ import { basename, dirname, resolve } from 'node:path'
 import { globSync } from 'tinyglobby'
 import { defineConfig } from 'tsdown'
 
-const rulesEntry = globSync(`src/rules/**/*.ts`, {
+const rulesEntry = globSync('src/rules/**/*.ts', {
   ignore: ['**/*.test.ts', 'src/rules/index.ts'],
 })
 

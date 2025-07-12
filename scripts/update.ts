@@ -27,13 +27,13 @@ async function writeRulesIndex() {
     '',
   ].join('\n')
 
-  writeFileSync(resolve(RULE_DIR, `index.ts`), index, 'utf-8')
+  writeFileSync(resolve(RULE_DIR, 'index.ts'), index, 'utf-8')
 }
 
 function writeRuleMetaDts() {
   rules.forEach(async (name) => {
     const dir = resolve(RULE_DIR, name)
-    const dtsFilename = resolve(dir, `type.d.ts`)
+    const dtsFilename = resolve(dir, 'type.d.ts')
 
     const meta = await import(resolve(dir, `${name}.ts`)).then((r) => r.default.meta)
 

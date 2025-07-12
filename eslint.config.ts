@@ -1,5 +1,4 @@
 import { defineConfig } from '@vida0905/eslint-config'
-import importLite from 'eslint-plugin-import-lite'
 
 export default defineConfig({
   pnpm: true,
@@ -48,6 +47,4 @@ export default defineConfig({
       ],
     }],
   },
-}).append({
-  ...importLite.configs.recommended,
 })
