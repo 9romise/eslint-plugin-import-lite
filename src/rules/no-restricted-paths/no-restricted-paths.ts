@@ -1,4 +1,4 @@
-import type { Arrayable } from '~/types'
+import type { MessageIds, RuleOptions } from './type'
 import type { Tree } from '~/types/index.js'
 import path from 'node:path'
 import process from 'node:process'
@@ -8,8 +8,8 @@ import {
   createRule,
   importType,
   moduleVisitor,
-  resolve,
 } from '~/utils/index'
+import { resolve } from '~/utils/resolve'
 
 function containsPath(filepath: string, target: string) {
   const relative = path.relative(target, filepath)
@@ -31,18 +31,6 @@ function areBothGlobPatternAndAbsolutePath(areGlobPatterns: boolean[]) {
   )
 }
 
-export interface Options {
-  basePath?: string
-  zones?: Array<{
-    from: Arrayable<string>
-    target: Arrayable<string>
-    message?: string
-    except?: string[]
-  }>
-}
-
-export type MessageId = 'path' | 'mixedGlob' | 'glob' | 'zone'
-
 export interface Validator {
   isPathRestricted: (absoluteImportPath: string) => boolean
   hasValidExceptions: boolean
@@ -50,7 +38,7 @@ export interface Validator {
   reportInvalidException: (node: Tree.Node) => void
 }
 
-export default createRule<[Options?], MessageId>({
+export default createRule<RuleOptions, MessageIds>({
   name: 'no-restricted-paths',
   meta: {
     type: 'problem',

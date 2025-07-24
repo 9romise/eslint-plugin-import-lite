@@ -1,5 +1,6 @@
 catalogs:
   dev:
+    '@types/is-glob': ^4.0.4
     '@types/node': ^24.0.13
     '@vida0905/eslint-config': ^2.4.4
     change-case: ^5.4.4
@@ -15,6 +16,8 @@ catalogs:
     '@eslint-community/eslint-utils': ^4.7.0
     '@typescript-eslint/types': ^8.36.0
     '@typescript-eslint/utils': ^8.36.0
+    is-glob: ^4.0.3
+    minimatch: ^10.0.3
   test:
     '@typescript-eslint/parser': ^8.36.0
     eslint-vitest-rule-tester: ^2.2.0
