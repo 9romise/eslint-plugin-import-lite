@@ -14,7 +14,7 @@ export function run<RuleOptions, MessageIds extends string>(options: ExtendedRul
   return _run<RuleOptions, MessageIds>({
     recursive: false,
     verifyAfterFix: false,
-    ...(options.lang === 'js' ? {} : { parser: tsParser as any }),
+    ...(options.lang === 'js' ? {} : { parser: tsParser }),
     ...options,
   })
 }
@@ -64,13 +64,13 @@ export const SYNTAX_VALID_CASES: ValidTestCase[]
     // issue #370: deep commonjs import
     {
       code: 'import { foo } from "./issue-370-commonjs-namespace/bar"',
-      settings: { 'import-x/ignore': ['foo'] },
+      // settings: { 'import-x/ignore': ['foo'] },
     },
 
     // issue #348: deep commonjs re-export
     {
       code: 'export * from "./issue-370-commonjs-namespace/bar"',
-      settings: { 'import-x/ignore': ['foo'] },
+      // settings: { 'import-x/ignore': ['foo'] },
     },
 
     {

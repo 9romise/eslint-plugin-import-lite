@@ -5,6 +5,7 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   resolve: {
     alias: {
+      '~test': resolve('test'),
       '~': resolve('src'),
     },
   },

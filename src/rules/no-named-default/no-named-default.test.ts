@@ -1,6 +1,6 @@
 import type { MessageIds, RuleOptions } from './type'
+import { run, SYNTAX_VALID_CASES } from '~test/utils'
 import { AST_NODE_TYPES } from '~/utils/ast'
-import { run, SYNTAX_VALID_CASES } from '~/utils/test'
 import rule from './no-named-default'
 
 run<RuleOptions, MessageIds>({

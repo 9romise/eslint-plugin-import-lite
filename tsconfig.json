@@ -5,6 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
+      "~test/*": ["./test/*"],
       "~/*": ["./src/*"]
     },
     "resolveJsonModule": true,

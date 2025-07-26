@@ -1,6 +1,6 @@
 import type { MessageIds, RuleOptions } from './type'
+import { $, run } from '~test/utils'
 import { AST_NODE_TYPES } from '~/utils/ast'
-import { $, run } from '~/utils/test'
 import rule from './consistent-type-specifier-style'
 
 run<RuleOptions, MessageIds>({

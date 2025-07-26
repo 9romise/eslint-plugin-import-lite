@@ -1,6 +1,6 @@
+import type { TestCaseError } from '~test/utils'
 import type { MessageIds, RuleOptions } from './type'
-import type { TestCaseError } from '~/utils/test'
-import { $, run } from '~/utils/test'
+import { $, run } from '~test/utils'
 import rule from './no-duplicates'
 
 function createDuplicatedError(
