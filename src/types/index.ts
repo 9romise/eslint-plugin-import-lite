@@ -1,4 +1,4 @@
-import type { TSESTree } from '@typescript-eslint/types'
+import type { TSESTree as Tree } from '@typescript-eslint/types'
 
 export {
   ReportFixFunction,
@@ -11,5 +11,9 @@ export {
 } from '@typescript-eslint/utils/ts-eslint'
 
 export {
-  TSESTree as Tree,
+  Tree,
 }
+
+export type Arrayable<T> = T | T[]
+
+export type LiteralNodeValue = Tree.Literal['value']

@@ -1,5 +1,5 @@
 import type { MessageIds, RuleOptions } from './type'
-import type { Tree } from '~/types/index.js'
+import type { Arrayable, Tree } from '~/types'
 import path from 'node:path'
 import process from 'node:process'
 import isGlob from 'is-glob'
@@ -8,7 +8,7 @@ import {
   createRule,
   importType,
   moduleVisitor,
-} from '~/utils/index'
+} from '~/utils'
 import { resolve } from '~/utils/resolve'
 
 function containsPath(filepath: string, target: string) {
@@ -111,7 +111,7 @@ export default createRule<RuleOptions, MessageIds>({
     const matchingZones = restrictedPaths.filter((zone) =>
       [zone.target]
         .flat()
-        .map((target) => path.resolve(basePath, target))
+        .map((target) => path.resolve(basePath, target!))
         .some((targetPath) => isMatchingTargetPath(filename, targetPath)),
     )
 
@@ -124,7 +124,7 @@ export default createRule<RuleOptions, MessageIds>({
         absoluteExceptionPath,
       )
 
-      return importType(relativeExceptionPath, context) !== 'parent'
+      return importType(relativeExceptionPath, context.physicalFilename) !== 'parent'
     }
 
     function reportInvalidExceptionPath(node: Tree.Node) {
@@ -273,7 +273,7 @@ export default createRule<RuleOptions, MessageIds>({
       (source) => {
         const importPath = source.value
 
-        const absoluteImportPath = resolve(importPath, context)
+        const absoluteImportPath = resolve(importPath)
 
         if (!absoluteImportPath) {
           return
@@ -281,7 +281,7 @@ export default createRule<RuleOptions, MessageIds>({
 
         for (const [index, zone] of matchingZones.entries()) {
           if (!validators[index]) {
-            validators[index] = makePathValidators(zone.from, zone.except)
+            validators[index] = makePathValidators(zone.from!, zone.except)
           }
 
           const applicableValidatorsForImportPath = validators[index].filter(

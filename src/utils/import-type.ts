@@ -1,7 +1,7 @@
-import type { LiteralNodeValue, PluginSettings, RuleContext } from '~/types'
+import type { LiteralNodeValue } from '~/types'
 import { isBuiltin } from 'node:module'
 import path from 'node:path'
-import { getContextPackagePath } from './package-path'
+import { getFilePackagePath } from './package-path'
 import { resolve } from './resolve'
 
 /**
@@ -27,26 +27,12 @@ function baseModule(name: string) {
 }
 
 /**
- * Check if the name is an internal module.
- *
- * An internal module is declared by `import-x/internal-regex` via settings.
- *
- * @param name The name of the module to check
- * @param settings The settings of the plugin
- * @returns `true` if the name is an internal module, otherwise `false`
- */
-function isInternalRegexMatch(name: string, settings: PluginSettings) {
-  const internalScope = settings?.['import-x/internal-regex']
-  return internalScope && new RegExp(internalScope).test(name)
-}
-
-/**
  * Check if the name is an absolute path.
  *
  * @param name The name of the module to check
  * @returns `true` if the name is an absolute path, otherwise `false`
  */
-export function isAbsolute(name?: LiteralNodeValue) {
+function isAbsolute(name?: LiteralNodeValue) {
   return typeof name === 'string' && path.isAbsolute(name)
 }
 
@@ -63,44 +49,16 @@ export function isAbsolute(name?: LiteralNodeValue) {
  *   'path'
  *
  * @param name The name of the module to check
- * @param settings The settings of the plugin
  * @param modulePath The path of the module to check
  * @returns `true` if the name is a built-in module, otherwise `false`
  */
-export function isBuiltIn(name: string, settings: PluginSettings, modulePath?: string | null) {
+function isBuiltIn(name: string, modulePath?: string | null) {
   // path is defined only when a resolver resolves to a non-standard path
   if (modulePath || !name) {
     return false
   }
   const base = baseModule(name)
-  const extras = (settings && settings['import-x/core-modules']) || []
-  return isBuiltin(base) || extras.includes(base)
-}
-
-export function isExternalModule(
-  name: string,
-  modulePath: string,
-  context: RuleContext,
-) {
-  return (
-    (isModule(name) || isScoped(name))
-    && typeTest(name, context, modulePath) === 'external'
-  )
-}
-
-export function isExternalModuleMain(
-  name: string,
-  modulePath: string,
-  context: RuleContext,
-) {
-  if (arguments.length < 3) {
-    throw new TypeError(
-      'isExternalModule: name, path, and context are all required',
-    )
-  }
-  return (
-    isModuleMain(name) && typeTest(name, context, modulePath) === 'external'
-  )
+  return isBuiltin(base)
 }
 
 const moduleRegExp = /^\w/
@@ -127,12 +85,6 @@ function isModule(name: string) {
   return !!name && moduleRegExp.test(name)
 }
 
-const moduleMainRegExp = /^\w((?!\/).)*$/
-
-function isModuleMain(name: string) {
-  return !!name && moduleMainRegExp.test(name)
-}
-
 const scopedRegExp = /^@[^/]+\/?[^/]+/
 
 /**
@@ -146,14 +98,8 @@ const scopedRegExp = /^@[^/]+\/?[^/]+/
  * @param name The name of the module to check
  * @returns `true` if the name is a scoped module name, otherwise `false`
  */
-export function isScoped(name: string) {
+function isScoped(name: string) {
   return !!name && scopedRegExp.test(name)
-}
-
-const scopedMainRegExp = /^@(?:[^/]+\/[^/]+|[^/]{2,})$/
-
-export function isScopedMain(name: string) {
-  return !!name && scopedMainRegExp.test(name)
 }
 
 /**
@@ -219,27 +165,21 @@ function isRelativeToSibling(name: string) {
  * `import-x/external-module-folders` settings.
  *
  * @param filepath The path to check
- * @param context The context of the rule
+ * @param physicalFilename The physical path of the file
  * @returns `true` if the path is an external path, otherwise `false`
  */
-function isExternalPath(
-  filepath: string | null | undefined,
-  context: RuleContext,
-) {
+function isExternalPath(filepath: string | null | undefined, physicalFilename: string) {
   if (!filepath) {
     return false
   }
 
-  const { settings } = context
-  const packagePath = getContextPackagePath(context)
+  const packagePath = getFilePackagePath(physicalFilename)
 
   if (path.relative(packagePath, filepath).startsWith('..')) {
     return true
   }
 
-  const folders = settings?.['import-x/external-module-folders'] || [
-    'node_modules',
-  ]
+  const folders = ['node_modules']
   return folders.some((folder) => {
     const folderPath = path.resolve(packagePath, folder)
     const relativePath = path.relative(folderPath, filepath)
@@ -253,17 +193,14 @@ function isExternalPath(
  * An internal path is a path that is inside the package directory.
  *
  * @param filepath The path to check
- * @param context The context of the rule
+ * @param physicalFilename The physical path of the file
  * @returns `true` if the path is an internal path, otherwise `false`
  */
-function isInternalPath(
-  filepath: string | null | undefined,
-  context: RuleContext,
-) {
+function isInternalPath(filepath: string | null | undefined, physicalFilename: string) {
   if (!filepath) {
     return false
   }
-  const packagePath = getContextPackagePath(context)
+  const packagePath = getFilePackagePath(physicalFilename)
   return !path.relative(packagePath, filepath).startsWith('../')
 }
 
@@ -285,24 +222,16 @@ export function isExternalLookingName(name: string) {
  * Returns the type of the module.
  *
  * @param name The name of the module to check
- * @param context The context of the rule
+ * @param physicalFilename The physical path of the file
  * @param path The path of the module to check
  * @returns The type of the module
  */
-function typeTest(
-  name: LiteralNodeValue,
-  context: RuleContext,
-  path?: string | null,
-) {
-  const { settings } = context
+function typeTest(name: LiteralNodeValue, physicalFilename: string, path?: string | null) {
   if (typeof name === 'string') {
-    if (isInternalRegexMatch(name, settings)) {
-      return 'internal'
-    }
     if (isAbsolute(name)) {
       return 'absolute'
     }
-    if (isBuiltIn(name, settings, path)) {
+    if (isBuiltIn(name, path)) {
       return 'builtin'
     }
     if (isRelativeToParent(name)) {
@@ -315,10 +244,10 @@ function typeTest(
       return 'sibling'
     }
   }
-  if (isExternalPath(path, context)) {
+  if (isExternalPath(path, physicalFilename)) {
     return 'external'
   }
-  if (isInternalPath(path, context)) {
+  if (isInternalPath(path, physicalFilename)) {
     return 'internal'
   }
   if (typeof name === 'string' && isExternalLookingName(name)) {
@@ -331,15 +260,11 @@ function typeTest(
  * Returns the type of the module.
  *
  * @param name The name of the module to check
- * @param context The context of the rule
+ * @param physicalFilename The physical path of the file
  * @returns The type of the module
  */
-export function importType(name: LiteralNodeValue, context: RuleContext) {
-  return typeTest(
-    name,
-    context,
-    typeof name === 'string' ? resolve(name, context) : null,
-  )
+export function importType(name: LiteralNodeValue, physicalFilename: string) {
+  return typeTest(name, physicalFilename, typeof name === 'string' ? resolve(name) : null)
 }
 
 export type ImportType = ReturnType<typeof importType>
