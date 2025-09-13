@@ -2,7 +2,7 @@
   "name": "eslint-plugin-import-lite",
   "type": "module",
   "version": "0.3.0",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.16.0",
   "author": "Vida Xie<https://github.com/9romise>",
   "license": "MIT",
   "homepage": "https://github.com/9romise/eslint-plugin-import-lite#readme",

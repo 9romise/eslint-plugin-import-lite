@@ -1,21 +1,21 @@
 catalogs:
   dev:
-    '@types/node': ^24.0.13
-    '@vida0905/eslint-config': ^2.4.4
+    '@types/node': ^24.3.3
+    '@vida0905/eslint-config': ^2.6.1
     change-case: ^5.4.4
-    eslint: ^9.31.0
-    json-schema-to-typescript-lite: ^14.1.0
+    eslint: ^9.35.0
+    json-schema-to-typescript-lite: ^15.0.0
     nano-staged: ^0.8.0
-    simple-git-hooks: ^2.13.0
-    tinyglobby: ^0.2.14
-    tsdown: ^0.12.9
-    tsx: ^4.20.3
-    typescript: ^5.8.3
+    simple-git-hooks: ^2.13.1
+    tinyglobby: ^0.2.15
+    tsdown: ^0.15.1
+    tsx: ^4.20.5
+    typescript: ^5.9.2
   prod:
-    '@eslint-community/eslint-utils': ^4.7.0
-    '@typescript-eslint/types': ^8.36.0
-    '@typescript-eslint/utils': ^8.36.0
+    '@eslint-community/eslint-utils': ^4.9.0
+    '@typescript-eslint/types': ^8.43.0
+    '@typescript-eslint/utils': ^8.43.0
   test:
-    '@typescript-eslint/parser': ^8.36.0
-    eslint-vitest-rule-tester: ^2.2.0
+    '@typescript-eslint/parser': ^8.43.0
+    eslint-vitest-rule-tester: ^2.2.1
     vitest: ^3.2.4
