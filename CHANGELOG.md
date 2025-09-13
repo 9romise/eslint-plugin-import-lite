@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.1](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.3.0...v0.3.1) (2025-09-13)
+
+
+### Bug Fixes
+
+* update deps ([4d665ca](https://github.com/9romise/eslint-plugin-import-lite/commit/4d665ca7abc42d25726a12bc778fcc4a31686686))
+
+
+### Chores
+
+* avoid escape ([2a3ea8a](https://github.com/9romise/eslint-plugin-import-lite/commit/2a3ea8afda30cce0463367eac5995bb5f4415e3b))
+* move `utils/test` to `test/utils` ([5668dd5](https://github.com/9romise/eslint-plugin-import-lite/commit/5668dd55660d1c78fb5f289ed45912d64f5929e1))
+
 ## [0.3.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.2.0...v0.3.0) (2025-06-18)
 
 
