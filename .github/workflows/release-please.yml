@@ -35,14 +35,12 @@ jobs:
           node-version: lts/*
           registry-url: https://registry.npmjs.org/
           cache: pnpm
-
+      - run: npm i -g npm@latest
       - run: npm i -g @antfu/ni
       - run: nci
 
       - name: Publish package
         run: pnpm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Generate changelog
         run: nlx changelogithub
