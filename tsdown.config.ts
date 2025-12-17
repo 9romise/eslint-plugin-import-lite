@@ -32,6 +32,5 @@ export default defineConfig([
         ],
       },
     },
-    shims: true,
   },
 ])
