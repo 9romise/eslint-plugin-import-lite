@@ -1,6 +1,7 @@
 import type { MessageIds, RuleOptions } from './type'
-import { createRule, sourceType } from '~/utils'
+import { createRule } from '~/utils'
 import { getValue } from '~/utils/ast'
+import { sourceType } from '~/utils/compat'
 
 export default createRule<RuleOptions, MessageIds>({
   name: 'no-default-export',
