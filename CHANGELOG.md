@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.4.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.3.1...v0.4.0) (2025-12-17)
+
+
+### Features
+
+* integrate `eslint-typegen` for improved type generation and add rule options typings ([7a98574](https://github.com/9romise/eslint-plugin-import-lite/commit/7a9857469b3a06dd3792c4e23fa539d5189351b5))
+* port `exports-last` ([#19](https://github.com/9romise/eslint-plugin-import-lite/issues/19)) ([953070c](https://github.com/9romise/eslint-plugin-import-lite/commit/953070c34a2a75c19cbc2dff15e034b7b97c0661))
+* update deps ([6bec3ca](https://github.com/9romise/eslint-plugin-import-lite/commit/6bec3cab834b69a0e238eae35cb8e6c5650f5749))
+
+
+### Bug Fixes
+
+* enhance `Rules` type definition ([bc0bfd8](https://github.com/9romise/eslint-plugin-import-lite/commit/bc0bfd82265a14388030d9b561edb3e8e7abb4d0))
+
+
+### Chores
+
+* organize utils ([b7f472b](https://github.com/9romise/eslint-plugin-import-lite/commit/b7f472b2602d36637a2e03041481e3ead9f03103))
+* remove `@eslint-community/eslint-utils` dependency ([5cdac7e](https://github.com/9romise/eslint-plugin-import-lite/commit/5cdac7e3efedf221c8a8b6de04b099d73cf2cd64))
+* remove `@typescript-eslint/types` dependency ([f2e09e9](https://github.com/9romise/eslint-plugin-import-lite/commit/f2e09e92d9a5f8cf3eeb3807b25040c0995c413e))
+* remove `TestCaseError#type` ([3805886](https://github.com/9romise/eslint-plugin-import-lite/commit/3805886c0cccd28c0c00231262d06e64d7564d36))
+
 ## [0.3.1](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.3.0...v0.3.1) (2025-09-13)
 
 
