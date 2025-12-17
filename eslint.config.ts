@@ -25,6 +25,14 @@ export default defineConfig({
           name: '@typescript-eslint/utils',
           allowTypeImports: true,
         },
+        {
+          name: '@typescript-eslint/utils/ast-utils',
+          allowTypeImports: true,
+        },
+        {
+          name: '@typescript-eslint/utils/eslint-utils',
+          allowTypeImports: true,
+        },
       ],
     }],
   },
@@ -35,15 +43,6 @@ export default defineConfig({
   rules: {
     'no-restricted-imports': ['error', {
       paths: [
-        {
-          name: '@typescript-eslint/utils',
-          importNames: ['ASTUtils'],
-          message: 'Import from "~/utils/ast" instead',
-        },
-        {
-          name: '@typescript-eslint/utils/ast-utils',
-          message: 'Import from "~/utils/ast" instead',
-        },
         {
           name: '@typescript-eslint/utils',
           importNames: ['TSESLint', 'TSESTree'],
