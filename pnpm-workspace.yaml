@@ -1,6 +1,7 @@
 catalogs:
   dev:
     '@types/node': ^25.0.3
+    '@typescript-eslint/utils': ^8.50.0
     '@vida0905/eslint-config': ^2.7.1
     change-case: ^5.4.4
     eslint: ^9.39.2
@@ -12,8 +13,6 @@ catalogs:
     tsdown: ^0.18.0
     tsx: ^4.21.0
     typescript: ^5.9.3
-  prod:
-    '@typescript-eslint/utils': ^8.50.0
   test:
     '@typescript-eslint/parser': ^8.50.0
     eslint-vitest-rule-tester: ^3.0.1

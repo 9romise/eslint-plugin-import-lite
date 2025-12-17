@@ -1,6 +1,6 @@
 import type { TSESTree } from '@typescript-eslint/utils'
 
-export {
+export type {
   ReportFixFunction,
   RuleContext,
   RuleFix,
@@ -9,6 +9,6 @@ export {
   SourceCode,
 } from '@typescript-eslint/utils/ts-eslint'
 
-export {
+export type {
   TSESTree as Tree,
 }

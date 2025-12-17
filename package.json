@@ -56,7 +56,7 @@
   "devDependencies": {
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
-    "@typescript-eslint/utils": "catalog:prod",
+    "@typescript-eslint/utils": "catalog:dev",
     "@vida0905/eslint-config": "catalog:dev",
     "change-case": "catalog:dev",
     "eslint": "catalog:dev",
