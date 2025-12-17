@@ -14,11 +14,23 @@
 
 ## Feature
 
+- Zero dependencies.
 - Port some useful rules that don’t require a resolver from [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
 - No need for a resolver and settings like those in [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x).
 - Drop babel and flow support.
 
 See all rules in [`src/rules`](./src/rules)
+
+## Available Rules
+
+- [consistent-type-specifier-style](./src/rules/consistent-type-specifier-style/README.md)
+- [exports-last](./src/rules/exports-last/README.md)
+- [first](./src/rules/first/README.md)
+- [newline-after-import](./src/rules/newline-after-import/README.md)
+- [no-default-export](./src/rules/no-default-export/README.md)
+- [no-duplicates](./src/rules/no-duplicates/README.md)
+- [no-mutable-exports](./src/rules/no-mutable-exports/README.md)
+- [no-named-default](./src/rules/no-named-default/README.md)
 
 ## Motivation
 
