@@ -1,17 +1,6 @@
 import type { Tree } from '~/types'
 import { createRule } from '~/utils'
 
-function findLastIndex<T>(array: T[], predicate: (item: T) => boolean) {
-  let i = array.length - 1
-  while (i >= 0) {
-    if (predicate(array[i])) {
-      return i
-    }
-    i--
-  }
-  return -1
-}
-
 function isNonExportStatement({ type }: Tree.Node) {
   return (
     type !== 'ExportDefaultDeclaration'
@@ -36,10 +25,7 @@ export default createRule({
   create(context) {
     return {
       Program({ body }) {
-        const lastNonExportStatementIndex = findLastIndex(
-          body,
-          isNonExportStatement,
-        )
+        const lastNonExportStatementIndex = body.findLastIndex(isNonExportStatement)
 
         if (lastNonExportStatementIndex !== -1) {
           for (const node of body.slice(0, lastNonExportStatementIndex)) {
