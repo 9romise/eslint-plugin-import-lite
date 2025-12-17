@@ -2,7 +2,7 @@ import type { ESLint, Linter } from 'eslint'
 import type { ESLintRuleModule } from './utils'
 import { rules } from './rules'
 
-const pluginName = 'import-lite'
+export const pluginName = 'import-lite'
 
 function generateConfig(name: string, filter?: (ruleName: string, rule: ESLintRuleModule<unknown[], string>) => boolean): Linter.Config {
   let ruleMeta = Object.entries(rules).filter(([_, rule]) => !rule.meta?.deprecated)

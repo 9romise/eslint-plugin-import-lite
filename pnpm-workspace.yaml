@@ -4,6 +4,7 @@ catalogs:
     '@vida0905/eslint-config': ^2.6.1
     change-case: ^5.4.4
     eslint: ^9.35.0
+    eslint-typegen: ^2.3.0
     json-schema-to-typescript-lite: ^15.0.0
     nano-staged: ^0.8.0
     simple-git-hooks: ^2.13.1

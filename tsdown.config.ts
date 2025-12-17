@@ -10,16 +10,11 @@ const rulesEntry = globSync('src/rules/**/*.ts', {
 
 export default defineConfig([
   {
-    dts: {
-      emitDtsOnly: true,
-    },
-    entry: ['src/index.ts'],
-  },
-  {
     alias: {
       '~': resolve('src'),
     },
     clean: true,
+    copy: ['src/dts'],
     dts: false,
     entry: ['src/index.ts'],
     format: 'esm',

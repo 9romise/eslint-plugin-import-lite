@@ -17,14 +17,17 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/dts/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.js"
+    },
+    "./rule-options": {
+      "types": "./dist/dts/rule-options.d.ts"
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/dts/index.d.ts",
   "files": [
     "dist"
   ],
@@ -61,6 +64,7 @@
     "change-case": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-import-lite": "workspace:*",
+    "eslint-typegen": "catalog:dev",
     "eslint-vitest-rule-tester": "catalog:test",
     "json-schema-to-typescript-lite": "catalog:dev",
     "nano-staged": "catalog:dev",

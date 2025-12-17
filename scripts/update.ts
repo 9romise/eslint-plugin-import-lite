@@ -2,8 +2,10 @@ import type { JSONSchema4 } from '@typescript-eslint/utils/json-schema'
 import { writeFileSync } from 'node:fs'
 import { basename, resolve } from 'node:path'
 import { camelCase, pascalCase } from 'change-case'
+import { pluginsToRulesDTS } from 'eslint-typegen/core'
 import { compile } from 'json-schema-to-typescript-lite'
 import { globSync } from 'tinyglobby'
+import plugin, { pluginName } from '../src/index'
 
 const GEN_HEADER = '/* GENERATED, DO NOT EDIT DIRECTLY */'
 const RULE_DIR = resolve('src/rules')
@@ -17,13 +19,13 @@ async function writeRulesIndex() {
   const index = [
     GEN_HEADER,
     '',
-    `import type { ESLintRuleModule } from '~/utils'`,
+    `import type { Rules } from '~/dts/rules'`,
     '',
     ...rules.map((i) => `import ${camelCase(i)} from './${i}/${i}'`),
     '',
-    'export const rules: Record<string, ESLintRuleModule<unknown[], string>> = {',
+    'export const rules = {',
     ...rules.map((i) => `  '${i}': ${camelCase(i)},`),
-    '}',
+    '} satisfies Rules',
     '',
   ].join('\n')
 
@@ -78,6 +80,19 @@ function writeRuleMetaDts() {
   })
 }
 
+async function writePluginType() {
+  const dts = await pluginsToRulesDTS(
+    {
+      [pluginName]: plugin,
+    },
+    {
+      includeAugmentation: false,
+    },
+  )
+  writeFileSync(resolve('src/dts', 'rule-options.d.ts'), dts, 'utf-8')
+}
+
 console.log(['updating rules:', ...rules].join('\n'))
 writeRulesIndex()
 writeRuleMetaDts()
+writePluginType()

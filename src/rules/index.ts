@@ -1,6 +1,6 @@
 /* GENERATED, DO NOT EDIT DIRECTLY */
 
-import type { ESLintRuleModule } from '~/utils'
+import type { Rules } from '~/dts/rules'
 
 import consistentTypeSpecifierStyle from './consistent-type-specifier-style/consistent-type-specifier-style'
 import exportsLast from './exports-last/exports-last'
@@ -11,7 +11,7 @@ import noDuplicates from './no-duplicates/no-duplicates'
 import noMutableExports from './no-mutable-exports/no-mutable-exports'
 import noNamedDefault from './no-named-default/no-named-default'
 
-export const rules: Record<string, ESLintRuleModule<unknown[], string>> = {
+export const rules = {
   'consistent-type-specifier-style': consistentTypeSpecifierStyle,
   'exports-last': exportsLast,
   'first': first,
@@ -20,4 +20,4 @@ export const rules: Record<string, ESLintRuleModule<unknown[], string>> = {
   'no-duplicates': noDuplicates,
   'no-mutable-exports': noMutableExports,
   'no-named-default': noNamedDefault,
-}
+} satisfies Rules
