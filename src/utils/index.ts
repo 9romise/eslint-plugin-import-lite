@@ -1,7 +1,7 @@
 import type { RuleListener, RuleWithMetaAndName } from '@typescript-eslint/utils/eslint-utils'
 import type { RuleContext } from '@typescript-eslint/utils/ts-eslint'
 import type { Rule } from 'eslint'
-import { deepMerge, isObjectNotArray } from '@typescript-eslint/utils/eslint-utils'
+import { isPlainObject, toMerged } from 'es-toolkit'
 
 interface ESLintRuleModule<
   T extends readonly unknown[],
@@ -37,8 +37,8 @@ export function createRule<
       const optionsWithDefault = Array.from(
         { length: optionsCount },
         (_, i) => {
-          if (isObjectNotArray(context.options[i]) && isObjectNotArray(defaultOptions[i])) {
-            return deepMerge(defaultOptions[i], context.options[i])
+          if (isPlainObject(context.options[i]) && isPlainObject(defaultOptions[i])) {
+            return toMerged(defaultOptions[i], context.options[i])
           }
           return context.options[i] ?? defaultOptions[i]
         },

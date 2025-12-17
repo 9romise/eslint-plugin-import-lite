@@ -59,6 +59,7 @@
     "@typescript-eslint/utils": "catalog:dev",
     "@vida0905/eslint-config": "catalog:dev",
     "change-case": "catalog:dev",
+    "es-toolkit": "catalog:inline",
     "eslint": "catalog:dev",
     "eslint-plugin-import-lite": "workspace:*",
     "eslint-typegen": "catalog:dev",

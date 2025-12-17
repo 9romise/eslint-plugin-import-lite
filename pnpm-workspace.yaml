@@ -13,6 +13,8 @@ catalogs:
     tsdown: ^0.18.0
     tsx: ^4.21.0
     typescript: ^5.9.3
+  inline:
+    es-toolkit: ^1.43.0
   test:
     '@typescript-eslint/parser': ^8.50.0
     eslint-vitest-rule-tester: ^3.0.1
