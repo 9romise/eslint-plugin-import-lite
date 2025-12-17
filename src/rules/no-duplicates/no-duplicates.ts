@@ -121,11 +121,11 @@ function getFix(
     const firstExistingIdentifiers = firstIsEmpty
       ? new Set()
       : new Set(
-        sourceCode.text
-          .slice(openBrace.range[1], closeBrace.range[0])
-          .split(',')
-          .map((x) => x.split(' as ')[0].trim()),
-      )
+          sourceCode.text
+            .slice(openBrace.range[1], closeBrace.range[0])
+            .split(',')
+            .map((x) => x.split(' as ')[0].trim()),
+        )
 
     const [specifiersText] = specifiers.reduce(
       ([result, needsComma, existingIdentifiers], specifier) => {

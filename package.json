@@ -2,7 +2,7 @@
   "name": "eslint-plugin-import-lite",
   "type": "module",
   "version": "0.3.1",
-  "packageManager": "pnpm@10.16.0",
+  "packageManager": "pnpm@10.26.0",
   "author": "Vida Xie<https://github.com/9romise>",
   "license": "MIT",
   "homepage": "https://github.com/9romise/eslint-plugin-import-lite#readme",
@@ -18,15 +18,15 @@
   "exports": {
     ".": {
       "types": "./dist/dts/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.mjs"
     },
     "./rule-options": {
       "types": "./dist/dts/rule-options.d.ts"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/dts/index.d.ts",
   "files": [
     "dist"
