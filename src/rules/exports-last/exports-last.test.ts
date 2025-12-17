@@ -1,14 +1,6 @@
-import type { TestCaseError } from '~test/utils'
 import type { MessageIds, RuleOptions } from './type'
-import type { AST_NODE_TYPES } from '~/types'
 import { run } from '~test/utils'
 import rule from './exports-last'
-
-function createInvalidCaseError(
-  type: `${AST_NODE_TYPES}`,
-): TestCaseError<MessageIds> {
-  return { messageId: 'end', type }
-}
 
 run<RuleOptions, MessageIds>({
   name: 'exports-last',
@@ -87,7 +79,9 @@ run<RuleOptions, MessageIds>({
         export default 'bar'
         const bar = true
       `,
-      errors: [createInvalidCaseError('ExportDefaultDeclaration')],
+      errors: [
+        { messageId: 'end', type: 'ExportDefaultDeclaration' },
+      ],
     },
     // Named export before variable declaration
     {
@@ -95,7 +89,9 @@ run<RuleOptions, MessageIds>({
         export const foo = 'bar'
         const bar = true
       `,
-      errors: [createInvalidCaseError('ExportNamedDeclaration')],
+      errors: [
+        { messageId: 'end', type: 'ExportNamedDeclaration' },
+      ],
     },
     // Export all before variable declaration
     {
@@ -103,7 +99,9 @@ run<RuleOptions, MessageIds>({
         export * from './foo'
         const bar = true
       `,
-      errors: [createInvalidCaseError('ExportAllDeclaration')],
+      errors: [
+        { messageId: 'end', type: 'ExportAllDeclaration' },
+      ],
     },
     // Many exports around variable declaration
     {
@@ -117,8 +115,8 @@ run<RuleOptions, MessageIds>({
         export const how = 'many'
       `,
       errors: [
-        createInvalidCaseError('ExportDefaultDeclaration'),
-        createInvalidCaseError('ExportNamedDeclaration'),
+        { messageId: 'end', type: 'ExportDefaultDeclaration' },
+        { messageId: 'end', type: 'ExportNamedDeclaration' },
       ],
     },
   ],
