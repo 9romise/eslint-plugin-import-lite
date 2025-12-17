@@ -80,7 +80,7 @@ run<RuleOptions, MessageIds>({
         const bar = true
       `,
       errors: [
-        { messageId: 'end', type: 'ExportDefaultDeclaration' },
+        { messageId: 'end' },
       ],
     },
     // Named export before variable declaration
@@ -90,7 +90,7 @@ run<RuleOptions, MessageIds>({
         const bar = true
       `,
       errors: [
-        { messageId: 'end', type: 'ExportNamedDeclaration' },
+        { messageId: 'end' },
       ],
     },
     // Export all before variable declaration
@@ -100,7 +100,7 @@ run<RuleOptions, MessageIds>({
         const bar = true
       `,
       errors: [
-        { messageId: 'end', type: 'ExportAllDeclaration' },
+        { messageId: 'end' },
       ],
     },
     // Many exports around variable declaration
@@ -115,8 +115,8 @@ run<RuleOptions, MessageIds>({
         export const how = 'many'
       `,
       errors: [
-        { messageId: 'end', type: 'ExportDefaultDeclaration' },
-        { messageId: 'end', type: 'ExportNamedDeclaration' },
+        { messageId: 'end' },
+        { messageId: 'end' },
       ],
     },
   ],

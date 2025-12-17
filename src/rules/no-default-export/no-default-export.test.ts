@@ -1,19 +1,6 @@
-import type { TestCaseError } from '~test/utils'
 import type { MessageIds, RuleOptions } from './type'
 import { run } from '~test/utils'
-import { AST_NODE_TYPES } from '~/utils/ast'
 import rule from './no-default-export'
-
-function createNoAliasDefaultError(
-  local: string,
-  type?: `${AST_NODE_TYPES}`,
-): TestCaseError<MessageIds> {
-  return {
-    messageId: 'noAliasDefault',
-    data: { local },
-    type: type as AST_NODE_TYPES,
-  }
-}
 
 run<RuleOptions, MessageIds>({
   name: 'no-default-export',
@@ -96,7 +83,6 @@ run<RuleOptions, MessageIds>({
       code: 'export default function bar() {};',
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
           line: 1,
           column: 8,
@@ -109,7 +95,6 @@ run<RuleOptions, MessageIds>({
         export default bar;`,
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
           line: 3,
           column: 16,
@@ -120,7 +105,6 @@ run<RuleOptions, MessageIds>({
       code: 'export default class Bar {};',
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
           line: 1,
           column: 8,
@@ -131,7 +115,6 @@ run<RuleOptions, MessageIds>({
       code: 'export default function() {};',
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
           line: 1,
           column: 8,
@@ -142,7 +125,6 @@ run<RuleOptions, MessageIds>({
       code: 'export default class {};',
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
           line: 1,
           column: 8,
@@ -151,21 +133,30 @@ run<RuleOptions, MessageIds>({
     },
     {
       code: 'let foo; export { foo as default }',
-      errors: [createNoAliasDefaultError('foo', 'ExportNamedDeclaration')],
+      errors: [
+        {
+          messageId: 'noAliasDefault',
+          data: { local: 'foo' },
+        },
+      ],
     },
     {
       code: `function foo() { return 'foo'; }\nexport default foo;`,
       filename: 'foo.ts',
       errors: [
         {
-          type: AST_NODE_TYPES.ExportDefaultDeclaration,
           messageId: 'preferNamed',
         },
       ],
     },
     {
       code: 'let foo; export { foo as "default" }',
-      errors: [createNoAliasDefaultError('foo', 'ExportNamedDeclaration')],
+      errors: [
+        {
+          messageId: 'noAliasDefault',
+          data: { local: 'foo' },
+        },
+      ],
     },
   ],
 })

@@ -1,10 +1,11 @@
+import type { TestCaseError } from '~test/utils'
 import type { MessageIds, RuleOptions } from './type'
 import { run } from '~test/utils'
 import rule from './newline-after-import'
 
-function createImportError(count: number) {
+function createImportError(count: number): TestCaseError<MessageIds> {
   return {
-    messageId: 'newline' as const,
+    messageId: 'newline',
     data: {
       count,
       lineSuffix: count > 1 ? 's' : '',
@@ -15,9 +16,9 @@ function createImportError(count: number) {
 
 const IMPORT_ERROR = createImportError(1)
 
-function createRequireError(count: number) {
+function createRequireError(count: number): TestCaseError<MessageIds> {
   return {
-    messageId: 'newline' as const,
+    messageId: 'newline',
     data: {
       count,
       lineSuffix: count > 1 ? 's' : '',

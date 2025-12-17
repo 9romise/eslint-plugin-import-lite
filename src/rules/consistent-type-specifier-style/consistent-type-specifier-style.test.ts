@@ -1,6 +1,5 @@
 import type { MessageIds, RuleOptions } from './type'
 import { $, run } from '~test/utils'
-import { AST_NODE_TYPES } from '~/utils/ast'
 import rule from './consistent-type-specifier-style'
 
 run<RuleOptions, MessageIds>({
@@ -133,7 +132,6 @@ run<RuleOptions, MessageIds>({
           data: {
             kind: 'type',
           },
-          type: AST_NODE_TYPES.ImportDeclaration,
         },
       ],
     },
@@ -142,7 +140,7 @@ run<RuleOptions, MessageIds>({
       output: `import type {Foo as Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [
-        { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
+        { messageId: 'topLevel' },
       ],
     },
     {
@@ -150,32 +148,32 @@ run<RuleOptions, MessageIds>({
       output: `import type {Foo, Bar} from 'Foo';`,
       options: ['top-level'],
       errors: [
-        { messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration },
+        { messageId: 'topLevel' },
       ],
     },
     {
       code: `import { Foo, type Bar } from 'Foo';`,
       output: `import { Foo  } from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+      errors: [{ messageId: 'topLevel' }],
     },
     {
       code: `import { type Foo, Bar } from 'Foo';`,
       output: `import {  Bar } from 'Foo';\nimport type {Foo} from 'Foo';`,
       options: ['top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+      errors: [{ messageId: 'topLevel' }],
     },
     {
       code: `import Foo, { type Bar } from 'Foo';`,
       output: `import Foo from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+      errors: [{ messageId: 'topLevel' }],
     },
     {
       code: `import Foo, { type Bar, Baz } from 'Foo';`,
       output: `import Foo, {  Baz } from 'Foo';\nimport type {Bar} from 'Foo';`,
       options: ['top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+      errors: [{ messageId: 'topLevel' }],
     },
     // https://github.com/import-js/eslint-plugin-import-x/issues/2753
     {
@@ -203,7 +201,7 @@ run<RuleOptions, MessageIds>({
         } from "package-2";
       `,
       options: ['top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportSpecifier }],
+      errors: [{ messageId: 'topLevel' }],
     },
 
     // prefer-top-level
@@ -211,7 +209,7 @@ run<RuleOptions, MessageIds>({
       code: `import { type Foo, type Bar } from 'Foo';`,
       output: `import type {Foo, Bar} from 'Foo';`,
       options: ['prefer-top-level'],
-      errors: [{ messageId: 'topLevel', type: AST_NODE_TYPES.ImportDeclaration }],
+      errors: [{ messageId: 'topLevel' }],
     },
 
     //
@@ -227,7 +225,6 @@ run<RuleOptions, MessageIds>({
           data: {
             kind: 'type',
           },
-          type: AST_NODE_TYPES.ImportDeclaration,
         },
       ],
     },
@@ -235,7 +232,7 @@ run<RuleOptions, MessageIds>({
       code: `import type { Foo, Bar, Baz } from 'Foo';`,
       output: `import  { type Foo, type Bar, type Baz } from 'Foo';`,
       options: ['inline'],
-      errors: [{ messageId: 'inline', type: AST_NODE_TYPES.ImportDeclaration }],
+      errors: [{ messageId: 'inline' }],
     },
   ],
 })

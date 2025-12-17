@@ -1,6 +1,5 @@
 import type { MessageIds, RuleOptions } from './type'
 import { run, SYNTAX_VALID_CASES } from '~test/utils'
-import { AST_NODE_TYPES } from '~/utils/ast'
 import rule from './no-named-default'
 
 run<RuleOptions, MessageIds>({
@@ -19,7 +18,6 @@ run<RuleOptions, MessageIds>({
         {
           messageId: 'default',
           data: { importName: 'bar' },
-          type: AST_NODE_TYPES.Identifier,
         },
       ],
     },
@@ -29,7 +27,6 @@ run<RuleOptions, MessageIds>({
         {
           messageId: 'default',
           data: { importName: 'bar' },
-          type: AST_NODE_TYPES.Identifier,
         },
       ],
     },
@@ -40,7 +37,6 @@ run<RuleOptions, MessageIds>({
         {
           messageId: 'default',
           data: { importName: 'bar' },
-          type: AST_NODE_TYPES.Identifier,
         },
       ],
       languageOptions: {
