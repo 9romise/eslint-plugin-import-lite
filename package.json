@@ -51,7 +51,6 @@
     }
   },
   "dependencies": {
-    "@eslint-community/eslint-utils": "catalog:prod",
     "@typescript-eslint/types": "catalog:prod"
   },
   "devDependencies": {

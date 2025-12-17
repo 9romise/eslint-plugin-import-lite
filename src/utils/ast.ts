@@ -1,11 +1,19 @@
-import type { TSESTree } from '@typescript-eslint/types'
+import type { AST_TOKEN_TYPES } from '@typescript-eslint/types'
+import type { Tree } from '~/types'
 import { AST_NODE_TYPES } from '@typescript-eslint/types'
 
-export { AST_NODE_TYPES, AST_TOKEN_TYPES } from '@typescript-eslint/types'
+export { AST_NODE_TYPES } from '@typescript-eslint/types'
 
-export * from '@typescript-eslint/utils/ast-utils'
+type PunctuatorToken<T extends string> = Tree.Token & {
+  type: AST_TOKEN_TYPES.Punctuator
+  value: T
+}
 
-export function getValue(node: TSESTree.Identifier | TSESTree.StringLiteral) {
+export function isCommaToken(token: Tree.Token): token is PunctuatorToken<','> {
+  return token.type === 'Punctuator' && token.value === ','
+}
+
+export function getValue(node: Tree.Identifier | Tree.StringLiteral) {
   switch (node.type) {
     case AST_NODE_TYPES.Identifier: {
       return node.name
@@ -14,7 +22,7 @@ export function getValue(node: TSESTree.Identifier | TSESTree.StringLiteral) {
       return node.value
     }
     default: {
-      throw new Error(`Unsupported node type: ${(node as TSESTree.Node).type}`)
+      throw new Error(`Unsupported node type: ${(node as Tree.Node).type}`)
     }
   }
 }

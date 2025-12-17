@@ -12,7 +12,6 @@ catalogs:
     tsx: ^4.20.5
     typescript: ^5.9.2
   prod:
-    '@eslint-community/eslint-utils': ^4.9.0
     '@typescript-eslint/types': ^8.43.0
     '@typescript-eslint/utils': ^8.43.0
   test:
