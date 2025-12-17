@@ -1,8 +1,5 @@
-import type { AST_TOKEN_TYPES } from '@typescript-eslint/types'
+import type { AST_TOKEN_TYPES } from '@typescript-eslint/utils'
 import type { Tree } from '~/types'
-import { AST_NODE_TYPES } from '@typescript-eslint/types'
-
-export { AST_NODE_TYPES } from '@typescript-eslint/types'
 
 type PunctuatorToken<T extends string> = Tree.Token & {
   type: AST_TOKEN_TYPES.Punctuator
@@ -15,10 +12,10 @@ export function isCommaToken(token: Tree.Token): token is PunctuatorToken<','> {
 
 export function getValue(node: Tree.Identifier | Tree.StringLiteral) {
   switch (node.type) {
-    case AST_NODE_TYPES.Identifier: {
+    case 'Identifier': {
       return node.name
     }
-    case AST_NODE_TYPES.Literal: {
+    case 'Literal': {
       return node.value
     }
     default: {

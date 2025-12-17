@@ -13,7 +13,6 @@ catalogs:
     tsx: ^4.21.0
     typescript: ^5.9.3
   prod:
-    '@typescript-eslint/types': ^8.50.0
     '@typescript-eslint/utils': ^8.50.0
   test:
     '@typescript-eslint/parser': ^8.50.0
