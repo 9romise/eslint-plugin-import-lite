@@ -1,6 +1,6 @@
 /* eslint perfectionist/sort-objects: "error" */
 
-import { basename, dirname, resolve } from 'node:path'
+import { basename, dirname } from 'node:path'
 import { globSync } from 'tinyglobby'
 import { defineConfig } from 'tsdown'
 
@@ -10,14 +10,9 @@ const rulesEntry = globSync('src/rules/**/*.ts', {
 
 export default defineConfig([
   {
-    alias: {
-      '~': resolve('src'),
-    },
-    clean: true,
     copy: ['src/dts'],
     dts: false,
     entry: ['src/index.ts'],
-    format: 'esm',
     hash: false,
     outputOptions: {
       advancedChunks: {
