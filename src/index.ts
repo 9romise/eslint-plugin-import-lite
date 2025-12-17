@@ -1,14 +1,16 @@
 import type { ESLint, Linter } from 'eslint'
-import type { ESLintRuleModule } from './utils'
+import type { Rules } from './dts'
 import { rules } from './rules'
 
 export const pluginName = 'import-lite'
 
-function generateConfig(name: string, filter?: (ruleName: string, rule: ESLintRuleModule<unknown[], string>) => boolean): Linter.Config {
-  let ruleMeta = Object.entries(rules).filter(([_, rule]) => !rule.meta?.deprecated)
-
-  if (filter)
-    ruleMeta = ruleMeta.filter(([ruleName, rule]) => filter(ruleName, rule))
+function generateConfig<T extends keyof Rules>(
+  name: string,
+  filter: (ruleName: T, rule: Rules[T]) => boolean = () => true,
+): Linter.Config {
+  const ruleMeta
+    = Object.entries(rules)
+      .filter(([ruleName, rule]) => !rule.meta?.deprecated && filter(ruleName as T, rule))
 
   return {
     name: `${pluginName}/${name}`,

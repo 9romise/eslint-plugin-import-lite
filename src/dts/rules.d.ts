@@ -6,6 +6,6 @@ type RuleName<K extends string>
     ? RuleName<Name>
     : K
 
-export type Rules = {
+export type Rules = Required<{
   [K in keyof RuleOptions as RuleName<K>]: Rule.RuleModule
-}
+}>

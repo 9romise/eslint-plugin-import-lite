@@ -3,7 +3,7 @@ import type { RuleContext } from '@typescript-eslint/utils/ts-eslint'
 import type { Rule } from 'eslint'
 import { deepMerge, isObjectNotArray } from '@typescript-eslint/utils/eslint-utils'
 
-export interface ESLintRuleModule<
+interface ESLintRuleModule<
   T extends readonly unknown[],
   // eslint-disable-next-line unused-imports/no-unused-vars
   TMessageIds extends string,
