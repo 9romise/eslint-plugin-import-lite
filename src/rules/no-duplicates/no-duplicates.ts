@@ -28,12 +28,34 @@ function checkImports(
   })
 }
 
+// For mixed imports like `import { y, type z }`, split into type and value specifiers
+function getSpecifiersByKind(node: Tree.ImportDeclaration) {
+  const typeSpecs: Array<{ name: string, localName: string }> = []
+  const valueSpecs: Array<{ name: string, localName: string }> = []
+
+  for (const spec of node.specifiers) {
+    if (spec.type !== 'ImportSpecifier')
+      continue
+    const name = spec.imported.type === 'Identifier' ? spec.imported.name : spec.imported.value
+    const localName = spec.local.name
+    const target = ('importKind' in spec && spec.importKind === 'type') ? typeSpecs : valueSpecs
+    target.push({ name, localName })
+  }
+
+  return { typeSpecs, valueSpecs }
+}
+
+function formatSpecifier(s: { name: string, localName: string }) {
+  return s.name !== s.localName ? `${s.name} as ${s.localName}` : s.name
+}
+
 function getFix(
   nodes: Tree.ImportDeclaration[],
   sourceCode: SourceCode,
   context: RuleContext<MessageIds, RuleOptions>,
 ): ReportFixFunction | null {
   const first = nodes[0]
+  const isTypeOnlyImport = first.importKind === 'type'
 
   // Adjusting the first import might make it multiline, which could break
   // `eslint-disable-next-line` comments and similar, so bail if the first
@@ -69,6 +91,8 @@ function getFix(
       importNode: Tree.ImportDeclaration
       identifiers: string[]
       isEmpty: boolean
+      typeSpecs?: Array<{ name: string, localName: string }>
+      valueSpecs?: Array<{ name: string, localName: string }>
     }>
   >((acc, node, nodeIndex) => {
     const tokens = sourceCode.getTokens(node)
@@ -79,14 +103,24 @@ function getFix(
       return acc
     }
 
-    acc.push({
+    const entry: (typeof acc)[0] = {
       importNode: node,
       identifiers: sourceCode.text
         .slice(openBrace.range[1], closeBrace.range[0])
         .split(','), // Split the text into separate identifiers (retaining any whitespace before or after)
       isEmpty: !restWithoutCommentsAndNamespacesHasSpecifiers[nodeIndex],
-    })
+    }
 
+    // When first is type-only and this import has mixed specifiers
+    if (isTypeOnlyImport && node.importKind !== 'type') {
+      const { typeSpecs, valueSpecs } = getSpecifiersByKind(node)
+      if (typeSpecs.length > 0 && valueSpecs.length > 0) {
+        entry.typeSpecs = typeSpecs
+        entry.valueSpecs = valueSpecs
+      }
+    }
+
+    acc.push(entry)
     return acc
   }, [])
 
@@ -129,6 +163,23 @@ function getFix(
 
     const [specifiersText] = specifiers.reduce(
       ([result, needsComma, existingIdentifiers], specifier) => {
+        // For mixed imports: only merge type specifiers into type-only first import
+        if (specifier.typeSpecs) {
+          const newSpecs = specifier.typeSpecs.filter((ts) => !existingIdentifiers.has(ts.name))
+          if (newSpecs.length === 0)
+            return [result, needsComma, existingIdentifiers]
+
+          const text = newSpecs.map(formatSpecifier).join(', ')
+          const updatedSet = new Set(existingIdentifiers)
+          newSpecs.forEach((ts) => updatedSet.add(ts.name))
+
+          return [
+            needsComma ? `${result}, ${text}` : `${result}${text}`,
+            true,
+            updatedSet,
+          ]
+        }
+
         const isTypeSpecifier
           = 'importNode' in specifier
             && specifier.importNode.importKind === 'type'
@@ -242,9 +293,25 @@ function getFix(
       fixes.push(fixer.insertTextAfter(tokenBefore, specifiersText))
     }
 
-    // Remove imports whose specifiers have been moved into the first import.
+    // Remove or edit imports whose specifiers have been moved into the first import.
     for (const specifier of specifiers) {
       const importNode = specifier.importNode
+
+      // For mixed imports: edit to keep only value specifiers
+      if (specifier.valueSpecs) {
+        const nodeTokens = sourceCode.getTokens(importNode)
+        const nodeOpenBrace = nodeTokens.find((token) => isPunctuator(token, '{'))
+        const nodeCloseBrace = nodeTokens.find((token) => isPunctuator(token, '}'))
+
+        if (nodeOpenBrace && nodeCloseBrace) {
+          fixes.push(fixer.replaceTextRange(
+            [nodeOpenBrace.range[1], nodeCloseBrace.range[0]],
+            ` ${specifier.valueSpecs.map(formatSpecifier).join(', ')} `,
+          ))
+        }
+        continue
+      }
+
       fixes.push(fixer.remove(importNode))
 
       const charAfterImportRange = [
