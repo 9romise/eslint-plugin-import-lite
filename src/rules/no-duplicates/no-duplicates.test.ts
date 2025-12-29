@@ -510,6 +510,10 @@ run({
       code: `import type A from 'foo';import { B } from 'foo';`,
       options: [{ 'prefer-inline': true }],
     },
+    {
+      code: `import type { x } from './foo'
+import { y } from './foo'`,
+    },
   ],
 
   invalid: [
@@ -557,6 +561,24 @@ run({
           ...createDuplicatedError('./foo'),
           line: 1,
           column: 52,
+        },
+      ],
+    },
+    {
+      code: `import type { x } from './foo'
+import { y, type z } from './foo'`,
+      output: `import type { x, z } from './foo'
+import { y } from './foo'`,
+      errors: [
+        {
+          ...createDuplicatedError('./foo'),
+          line: 1,
+          column: 24,
+        },
+        {
+          ...createDuplicatedError('./foo'),
+          line: 2,
+          column: 27,
         },
       ],
     },
