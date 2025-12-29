@@ -58,6 +58,7 @@
     "@typescript-eslint/parser": "catalog:test",
     "@typescript-eslint/utils": "catalog:dev",
     "@vida0905/eslint-config": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:test",
     "change-case": "catalog:dev",
     "es-toolkit": "catalog:inline",
     "eslint": "catalog:dev",

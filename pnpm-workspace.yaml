@@ -17,5 +17,6 @@ catalogs:
     es-toolkit: ^1.43.0
   test:
     '@typescript-eslint/parser': ^8.50.0
+    '@vitest/coverage-v8': ^4.0.16
     eslint-vitest-rule-tester: ^3.0.1
     vitest: ^4.0.16
