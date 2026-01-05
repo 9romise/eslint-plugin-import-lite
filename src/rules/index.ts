@@ -10,6 +10,7 @@ import noDefaultExport from './no-default-export/no-default-export'
 import noDuplicates from './no-duplicates/no-duplicates'
 import noMutableExports from './no-mutable-exports/no-mutable-exports'
 import noNamedDefault from './no-named-default/no-named-default'
+import preferDefaultExport from './prefer-default-export/prefer-default-export'
 
 export const rules = {
   'consistent-type-specifier-style': consistentTypeSpecifierStyle,
@@ -20,4 +21,5 @@ export const rules = {
   'no-duplicates': noDuplicates,
   'no-mutable-exports': noMutableExports,
   'no-named-default': noNamedDefault,
+  'prefer-default-export': preferDefaultExport,
 } satisfies Rules
