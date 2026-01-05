@@ -31,6 +31,7 @@ See all rules in [`src/rules`](./src/rules)
 - [no-duplicates](./src/rules/no-duplicates/README.md)
 - [no-mutable-exports](./src/rules/no-mutable-exports/README.md)
 - [no-named-default](./src/rules/no-named-default/README.md)
+- [prefer-default-export](./src/rules/prefer-default-export/README.md)
 
 ## Motivation
 
