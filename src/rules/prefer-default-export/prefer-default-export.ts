@@ -81,10 +81,6 @@ export default createRule<RuleOptions, MessageIds>({
         if (
           type === 'TSTypeAliasDeclaration'
           || type === 'TSInterfaceDeclaration'
-          // @ts-expect-error - legacy parser type
-          || type === 'TypeAlias'
-          // @ts-expect-error - legacy parser type
-          || type === 'InterfaceDeclaration'
         ) {
           specifierExportCount++
           hasTypeExport = true
