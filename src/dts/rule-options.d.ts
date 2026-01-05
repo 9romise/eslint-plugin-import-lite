@@ -43,6 +43,11 @@ export interface RuleOptions {
    * @see https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/no-named-default/README.md
    */
   'import-lite/no-named-default'?: Linter.RuleEntry<[]>
+  /**
+   * Prefer a default export if module exports a single name or multiple names.
+   * @see https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/prefer-default-export/README.md
+   */
+  'import-lite/prefer-default-export'?: Linter.RuleEntry<ImportLitePreferDefaultExport>
 }
 
 /* ======= Declarations ======= */
@@ -59,4 +64,8 @@ type ImportLiteNewlineAfterImport = []|[{
 // ----- import-lite/no-duplicates -----
 type ImportLiteNoDuplicates = []|[{
   "prefer-inline"?: boolean
+}]
+// ----- import-lite/prefer-default-export -----
+type ImportLitePreferDefaultExport = []|[{
+  target?: ("single" | "any")
 }]
