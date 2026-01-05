@@ -30,8 +30,8 @@ function checkImports(
 
 // For mixed imports like `import { y, type z }`, split into type and value specifiers
 function getSpecifiersByKind(node: Tree.ImportDeclaration) {
-  const typeSpecs: Array<{ name: string, localName: string }> = []
-  const valueSpecs: Array<{ name: string, localName: string }> = []
+  const typeSpecs: { name: string, localName: string }[] = []
+  const valueSpecs: { name: string, localName: string }[] = []
 
   for (const spec of node.specifiers) {
     if (spec.type !== 'ImportSpecifier')
@@ -87,13 +87,13 @@ function getFix(
     = restWithoutCommentsAndNamespaces.map(hasSpecifiers)
 
   const specifiers = restWithoutCommentsAndNamespaces.reduce<
-    Array<{
+    {
       importNode: Tree.ImportDeclaration
       identifiers: string[]
       isEmpty: boolean
-      typeSpecs?: Array<{ name: string, localName: string }>
-      valueSpecs?: Array<{ name: string, localName: string }>
-    }>
+      typeSpecs?: { name: string, localName: string }[]
+      valueSpecs?: { name: string, localName: string }[]
+    }[]
   >((acc, node, nodeIndex) => {
     const tokens = sourceCode.getTokens(node)
     const openBrace = tokens.find((token) => isPunctuator(token, '{'))

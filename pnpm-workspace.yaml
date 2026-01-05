@@ -1,8 +1,12 @@
+shellEmulator: true
+
+trustPolicy: no-downgrade
+
 catalogs:
   dev:
     '@types/node': ^25.0.3
-    '@typescript-eslint/utils': ^8.50.0
-    '@vida0905/eslint-config': ^2.7.1
+    '@typescript-eslint/utils': ^8.51.0
+    '@vida0905/eslint-config': ^2.8.0
     change-case: ^5.4.4
     eslint: ^9.39.2
     eslint-typegen: ^2.3.0
@@ -10,13 +14,13 @@ catalogs:
     nano-staged: ^0.9.0
     simple-git-hooks: ^2.13.1
     tinyglobby: ^0.2.15
-    tsdown: ^0.18.0
+    tsdown: ^0.18.4
     tsx: ^4.21.0
     typescript: ^5.9.3
   inline:
     es-toolkit: ^1.43.0
   test:
-    '@typescript-eslint/parser': ^8.50.0
+    '@typescript-eslint/parser': ^8.51.0
     '@vitest/coverage-v8': ^4.0.16
     eslint-vitest-rule-tester: ^3.0.1
     vitest: ^4.0.16

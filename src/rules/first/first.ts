@@ -57,10 +57,10 @@ export default createRule<RuleOptions, MessageIds>({
 
         let lastLegalImp: Tree.ProgramStatement | null = null
 
-        const errorInfos: Array<{
+        const errorInfos: {
           node: Tree.ProgramStatement
           range: [number, number]
-        }> = []
+        }[] = []
 
         let shouldSort = true
         let lastSortNodesIndex = 0
