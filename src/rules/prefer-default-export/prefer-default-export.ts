@@ -38,7 +38,7 @@ export default createRule<RuleOptions, MessageIds>({
     let namedExportNode: Tree.Node
 
     // get options. by default we look into files with single export
-    const { target } = options || {}
+    const { target } = options!
 
     function captureDeclaration(identifierOrPattern?: Tree.Node | null) {
       if (identifierOrPattern?.type === 'ObjectPattern') {
