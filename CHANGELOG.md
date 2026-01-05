@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.4.0...v0.5.0) (2026-01-05)
+
+
+### Features
+
+* port `prefer-default-export` ([#26](https://github.com/9romise/eslint-plugin-import-lite/issues/26)) ([8b9c6d0](https://github.com/9romise/eslint-plugin-import-lite/commit/8b9c6d04fcbddf5ef04fd598e0d223559f590adc))
+* switch to `es-toolkit` for object utilities ([f2a283c](https://github.com/9romise/eslint-plugin-import-lite/commit/f2a283ccd74fa9ee04fa3572147cc68ad30fc57b))
+
+
+### Bug Fixes
+
+* **no-duplicate:** mix type and value import ([#24](https://github.com/9romise/eslint-plugin-import-lite/issues/24)) ([600aa2e](https://github.com/9romise/eslint-plugin-import-lite/commit/600aa2eefc734423df8597d294efab01f595a8c1))
+
 ## [0.4.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.3.1...v0.4.0) (2025-12-17)
 
 
