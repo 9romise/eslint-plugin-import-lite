@@ -23,27 +23,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npm:
-    runs-on: ubuntu-latest
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          registry-url: https://registry.npmjs.org/
-          cache: pnpm
-      - run: npm i -g npm@latest
-      - run: npm i -g @antfu/ni
-      - run: nci
-
-      - name: Publish package
-        run: pnpm publish
-
-      - name: Generate changelog
-        run: nlx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    uses: sxzz/workflows/.github/workflows/release.yml@v1
+    with:
+      publish: true
+    permissions:
+      id-token: write
+      contents: write

@@ -10,20 +10,7 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: pnpm
-
-      - run: npm i -g @antfu/ni
-      - run: nci
-      - run: nr lint --fix
-
-      - uses: autofix-ci/action@v1.3
+  autofix:
+    uses: sxzz/workflows/.github/workflows/autofix.yml@v1
+    permissions:
+      contents: read
