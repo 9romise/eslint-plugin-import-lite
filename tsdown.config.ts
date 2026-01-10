@@ -12,7 +12,12 @@ export default defineConfig([
   {
     copy: ['src/dts'],
     dts: false,
-    entry: ['src/index.ts'],
+    exports: {
+      customExports: (exports) => ({
+        ...exports,
+        './rule-options': './dist/dts/rule-options.d.ts',
+      }),
+    },
     hash: false,
     outputOptions: {
       advancedChunks: {

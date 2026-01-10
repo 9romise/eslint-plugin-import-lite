@@ -16,14 +16,9 @@
   "keywords": [],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/dts/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.mjs"
-    },
-    "./rule-options": {
-      "types": "./dist/dts/rule-options.d.ts"
-    }
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json",
+    "./rule-options": "./dist/dts/rule-options.d.ts"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
