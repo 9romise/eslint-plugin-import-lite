@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.5.0...v0.5.1) (2026-01-10)
+
+
+### Build Related
+
+* enable tsdown's exports feature ([55c5247](https://github.com/9romise/eslint-plugin-import-lite/commit/55c52477e0c300e94bbc975997b70ad6b78bd44c))
+
 ## [0.5.0](https://github.com/9romise/eslint-plugin-import-lite/compare/v0.4.0...v0.5.0) (2026-01-05)
 
 
