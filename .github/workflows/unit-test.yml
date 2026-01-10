@@ -12,7 +12,7 @@ jobs:
   unit-test:
     uses: sxzz/workflows/.github/workflows/unit-test.yml@v1
     with:
-      node-versions: '20,lts/*'
+      node-versions: 20, "lts/*"
 
   coverage:
     uses: sxzz/workflows/.github/workflows/coverage.yml@v1
