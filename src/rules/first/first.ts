@@ -139,7 +139,7 @@ export default createRule<RuleOptions, MessageIds>({
               )
               const range = [
                 0,
-                removeFixers.at(-1).range[1],
+                removeFixers.at(-1)!.range[1],
               ] as const
 
               let insertSourceCode = sortNodes
