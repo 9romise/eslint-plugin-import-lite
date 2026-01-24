@@ -1,12 +1,7 @@
 /* eslint perfectionist/sort-objects: "error" */
 
 import { basename, dirname } from 'node:path'
-import { globSync } from 'tinyglobby'
 import { defineConfig } from 'tsdown'
-
-const rulesEntry = globSync('src/rules/**/*.ts', {
-  ignore: ['**/*.test.ts', 'src/rules/index.ts'],
-})
 
 export default defineConfig([
   {
@@ -19,8 +14,11 @@ export default defineConfig([
       }),
     },
     hash: false,
+    inlineOnly: [
+      'es-toolkit',
+    ],
     outputOptions: {
-      advancedChunks: {
+      codeSplitting: {
         groups: [
           {
             name: 'vender',
@@ -30,10 +28,10 @@ export default defineConfig([
             name: 'utils',
             test: 'utils',
           },
-          ...rulesEntry.map((rule) => ({
-            name: `rules/${basename(dirname(rule))}`,
-            test: rule,
-          })),
+          {
+            name: (id) => `rules/${basename(dirname(id))}`,
+            test: (id) => id.includes('rules/') && !id.includes('rules/index.ts'),
+          },
         ],
       },
     },

@@ -14,7 +14,7 @@ catalogs:
     nano-staged: ^0.9.0
     simple-git-hooks: ^2.13.1
     tinyglobby: ^0.2.15
-    tsdown: ^0.18.4
+    tsdown: ^0.20.1
     tsx: ^4.21.0
     typescript: ^5.9.3
   inline:
