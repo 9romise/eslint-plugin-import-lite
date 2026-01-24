@@ -183,7 +183,7 @@ export default createRule<RuleOptions, MessageIds>({
                   // not
                   // import { Value,  } from 'mod';
                   const maybeComma = sourceCode.getTokenAfter(
-                    valueSpecifiers[valueSpecifiers.length - 1],
+                    valueSpecifiers.at(-1),
                   )!
                   if (isCommaToken(maybeComma)) {
                     fixes.push(fixer.remove(maybeComma))
@@ -199,7 +199,7 @@ export default createRule<RuleOptions, MessageIds>({
                     isCommaToken,
                   )
                   const closingBrace = sourceCode.getTokenAfter(
-                    node.specifiers[node.specifiers.length - 1],
+                    node.specifiers.at(-1),
                     (token) => token.type === 'Punctuator' && token.value === '}',
                   )
                   fixes.push(
