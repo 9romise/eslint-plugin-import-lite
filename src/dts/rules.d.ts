@@ -1,5 +1,5 @@
 import type { Rule } from 'eslint'
-import type { RuleOptions } from './rule-options'
+import type { RuleOptions } from './rule-options.js'
 
 type RuleName<K extends string>
   = K extends `${string}/${infer Name}`
