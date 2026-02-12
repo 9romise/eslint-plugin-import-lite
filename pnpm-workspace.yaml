@@ -4,9 +4,9 @@ trustPolicy: no-downgrade
 
 catalogs:
   dev:
-    '@types/node': ^25.0.10
-    '@typescript-eslint/utils': ^8.53.1
-    '@vida0905/eslint-config': ^2.9.0
+    '@types/node': ^25.2.3
+    '@typescript-eslint/utils': ^8.55.0
+    '@vida0905/eslint-config': ^2.10.0
     change-case: ^5.4.4
     eslint: ^9.39.2
     eslint-typegen: ^2.3.0
@@ -14,13 +14,13 @@ catalogs:
     nano-staged: ^0.9.0
     simple-git-hooks: ^2.13.1
     tinyglobby: ^0.2.15
-    tsdown: ^0.20.1
+    tsdown: ^0.20.3
     tsx: ^4.21.0
     typescript: ^5.9.3
   inline:
     es-toolkit: ^1.44.0
   test:
-    '@typescript-eslint/parser': ^8.53.1
+    '@typescript-eslint/parser': ^8.55.0
     '@vitest/coverage-v8': ^4.0.18
-    eslint-vitest-rule-tester: ^3.0.1
+    eslint-vitest-rule-tester: ^3.1.0
     vitest: ^4.0.18
