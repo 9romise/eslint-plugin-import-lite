@@ -5,14 +5,8 @@ import { defineConfig } from 'tsdown'
 
 export default defineConfig([
   {
-    copy: ['src/dts'],
     dts: false,
-    exports: {
-      customExports: (exports) => ({
-        ...exports,
-        './rule-options': './dist/dts/rule-options.d.ts',
-      }),
-    },
+    entry: ['src/index.ts'],
     hash: false,
     inlineOnly: [
       'es-toolkit',
@@ -35,5 +29,12 @@ export default defineConfig([
         ],
       },
     },
+  },
+  {
+    dts: {
+      dtsInput: true,
+    },
+    entry: ['src/dts/index.d.ts', 'src/dts/rule-options.d.ts'],
+    outDir: 'dist/dts',
   },
 ])
