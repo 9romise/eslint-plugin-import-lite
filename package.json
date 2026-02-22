@@ -18,7 +18,7 @@
   "exports": {
     ".": {
       "types": "./dist/dts/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./dist/index.mjs"
     },
     "./package.json": "./package.json",
     "./rule-options": "./dist/dts/rule-options.d.ts"
