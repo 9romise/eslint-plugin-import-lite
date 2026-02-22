@@ -16,7 +16,10 @@
   "keywords": [],
   "sideEffects": false,
   "exports": {
-    ".": "./dist/index.mjs",
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
     "./package.json": "./package.json",
     "./rule-options": "./dist/dts/rule-options.d.ts"
   },
