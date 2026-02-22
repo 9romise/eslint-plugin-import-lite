@@ -39,5 +39,6 @@ export default defineConfig([
     },
     entry: ['src/dts/index.d.ts', 'src/dts/rule-options.d.ts'],
     outDir: 'dist/dts',
+    publint: true,
   },
 ])

@@ -58,6 +58,7 @@
     "eslint-vitest-rule-tester": "catalog:test",
     "json-schema-to-typescript-lite": "catalog:dev",
     "nano-staged": "catalog:dev",
+    "publint": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "tinyglobby": "catalog:dev",
     "tsdown": "catalog:dev",
