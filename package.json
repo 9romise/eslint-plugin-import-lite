@@ -44,6 +44,7 @@
     "eslint": ">=9.0.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/core": "catalog:dev",
     "@types/node": "catalog:dev",
     "@typescript-eslint/parser": "catalog:test",
     "@typescript-eslint/utils": "catalog:dev",

@@ -4,6 +4,7 @@ trustPolicy: no-downgrade
 
 catalogs:
   dev:
+    '@arethetypeswrong/core': ^0.18.2
     '@types/node': ^25.2.3
     '@typescript-eslint/utils': ^8.55.0
     '@vida0905/eslint-config': ^2.10.0

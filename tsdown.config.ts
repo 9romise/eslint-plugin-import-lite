@@ -31,6 +31,9 @@ export default defineConfig([
     },
   },
   {
+    attw: {
+      profile: 'esm-only',
+    },
     dts: {
       dtsInput: true,
     },
