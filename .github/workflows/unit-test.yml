@@ -13,6 +13,7 @@ jobs:
     uses: sxzz/workflows/.github/workflows/unit-test.yml@v1
     with:
       node-versions: 20, "lts/*"
+      build-for-lint: true
 
   coverage:
     uses: sxzz/workflows/.github/workflows/coverage.yml@v1
