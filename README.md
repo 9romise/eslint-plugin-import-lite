@@ -41,7 +41,7 @@ But there are some useful rules and [some people (including me) want to bring th
 
 ## See Also
 
-- [eslint-plugin-fast-import](https://npmx.dev/package/eslint-plugin-fast-import) - A ESLint plugin using a novel algorithm combined with the OXC Rust parser.
+- [eslint-plugin-fast-import](https://npmx.dev/package/eslint-plugin-fast-import) - An ESLint plugin using a novel algorithm combined with the OXC Rust parser.
 
 ## Credits
 
