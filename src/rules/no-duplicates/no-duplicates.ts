@@ -3,6 +3,8 @@ import type { ReportFixFunction, RuleContext, RuleFixer, SourceCode, Tree } from
 import { createRule } from '~/utils'
 import { resolve } from '~/utils/resolve'
 
+const LEADING_WHITESPACE_PATTERN = /^(\s*)/
+
 function checkImports(
   imported: Map<string, Tree.ImportDeclaration[]>,
   context: RuleContext<MessageIds, RuleOptions>,
@@ -197,7 +199,7 @@ function getFix(
 
               const curWithType
                 = preferInline && isTypeSpecifier
-                  ? cur.replace(/^(\s*)/, '$1type ')
+                  ? cur.replace(LEADING_WHITESPACE_PATTERN, '$1type ')
                   : cur
 
               return [

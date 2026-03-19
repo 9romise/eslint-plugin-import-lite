@@ -2,6 +2,10 @@ import type { MessageIds, RuleOptions } from './type'
 import type { ReportFixFunction, Tree } from '~/types'
 import { createRule } from '~/utils'
 
+const RELATIVE_PATTERN = /^\./
+const NON_WHITESPACE_PATTERN = /\S/
+const LEADING_WHITESPACE_PATTERN = /^(\s+)/
+
 function getImportValue(node: Tree.ProgramStatement) {
   return node.type === 'ImportDeclaration'
     ? node.source.value
@@ -78,7 +82,7 @@ export default createRule<RuleOptions, MessageIds>({
           ) {
             if (absoluteFirst) {
               const importValue = getImportValue(node)
-              if (typeof importValue === 'string' && /^\./.test(importValue)) {
+              if (typeof importValue === 'string' && RELATIVE_PATTERN.test(importValue)) {
                 anyRelative = true
               } else if (anyRelative) {
                 context.report({
@@ -145,7 +149,7 @@ export default createRule<RuleOptions, MessageIds>({
               let insertSourceCode = sortNodes
                 .map(({ range }) => {
                   const nodeSourceCode = originSourceCode.slice(...range)
-                  if (/\S/.test(nodeSourceCode[0])) {
+                  if (NON_WHITESPACE_PATTERN.test(nodeSourceCode[0])) {
                     return `\n${nodeSourceCode}`
                   }
                   return nodeSourceCode
@@ -156,7 +160,7 @@ export default createRule<RuleOptions, MessageIds>({
 
               if (!lastLegalImp) {
                 insertSourceCode
-                  = insertSourceCode.trim() + insertSourceCode.match(/^(\s+)/)![0]
+                  = insertSourceCode.trim() + insertSourceCode.match(LEADING_WHITESPACE_PATTERN)![0]
               }
 
               const insertFixer = lastLegalImp
