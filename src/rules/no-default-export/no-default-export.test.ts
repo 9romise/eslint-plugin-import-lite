@@ -9,9 +9,7 @@ run<RuleOptions, MessageIds>({
     {
       code: 'module.exports = function foo() {}',
       languageOptions: {
-        parserOptions: {
-          sourceType: 'script',
-        },
+        sourceType: 'script',
       },
     },
     {

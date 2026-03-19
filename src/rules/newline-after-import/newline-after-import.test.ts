@@ -131,166 +131,191 @@ run<RuleOptions, MessageIds>({
       }
     }`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import path from 'path';\nimport foo from 'foo';\n`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import path from 'path';import foo from 'foo';\n`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import path from 'path';import foo from 'foo';\n\nvar bar = 42;`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import foo from 'foo';\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import foo from 'foo';\n\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2 }],
     },
     {
       code: `import foo from 'foo';\n\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2, exactCount: true }],
     },
     {
       code: `import foo from 'foo';\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 1, exactCount: true }],
     },
     {
       code: `import foo from 'foo';\n\n// Some random comment\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2, exactCount: true }],
     },
     {
       code: `import foo from 'foo';\n// Some random comment\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 1, exactCount: true }],
     },
     {
       code: `import foo from 'foo';\n\n\n// Some random comment\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2, exactCount: true, considerComments: true }],
     },
     {
       code: `import foo from 'foo';\n\n// Some random comment\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 1, exactCount: true, considerComments: true }],
     },
     {
       code: `/**\n * A leading comment\n */\nimport foo from 'foo';\n\n// Some random comment\nexport {foo};`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2, exactCount: true }],
     },
     {
       code: `import foo from 'foo';\n\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 1 }],
     },
     {
       code: `import foo from 'foo';\n\n\n\n\nvar bar = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 4 }],
     },
     {
       code: `var foo = require('foo-module');\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `var foo = require('foo-module');\n\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 2 }],
     },
     {
       code: `var foo = require('foo-module');\n\n\n\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 4 }],
     },
     {
       code: `var foo = require('foo-module');\n\n\n\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 4, exactCount: true }],
     },
     {
       code: `var foo = require('foo-module');\n\n// Some random comment\n\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 4, exactCount: true }],
     },
     {
       code: `var foo = require('foo-module');\n\n\n\n\n// Some random comment\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ count: 4, exactCount: true, considerComments: true }],
     },
     {
       code: `require('foo-module');\n\nvar foo = 'bar';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import foo from 'foo';\nimport { bar } from './bar-lib';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `import foo from 'foo';\n\nvar a = 123;\n\nimport { bar } from './bar-lib';`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
       code: `var foo = require('foo-module');\n\nvar a = 123;\n\nvar bar = require('bar-lib');`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -301,7 +326,8 @@ run<RuleOptions, MessageIds>({
         }
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -312,7 +338,8 @@ run<RuleOptions, MessageIds>({
         }
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -324,7 +351,8 @@ run<RuleOptions, MessageIds>({
         }
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
 
@@ -334,7 +362,8 @@ run<RuleOptions, MessageIds>({
         import execa = require('execa');
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -343,7 +372,8 @@ run<RuleOptions, MessageIds>({
         import { ExecaReturnValue } from 'execa';
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -353,7 +383,8 @@ run<RuleOptions, MessageIds>({
         import { ExecbReturnValue } from 'execb';
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -363,7 +394,8 @@ run<RuleOptions, MessageIds>({
         import execb = require('execb');
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -371,7 +403,8 @@ run<RuleOptions, MessageIds>({
         export import a = obj;\nf(a);
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -383,7 +416,8 @@ run<RuleOptions, MessageIds>({
             f(a);
         }`,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -395,7 +429,8 @@ run<RuleOptions, MessageIds>({
         }
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -406,7 +441,8 @@ run<RuleOptions, MessageIds>({
       export import Foo = ns.baz.bar.Foo;
     `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -420,7 +456,8 @@ run<RuleOptions, MessageIds>({
         var bar = 42;
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -434,7 +471,8 @@ run<RuleOptions, MessageIds>({
         var bar = 42;
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ considerComments: true }],
     },
@@ -447,7 +485,8 @@ run<RuleOptions, MessageIds>({
         var bar = 42;
       `,
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -490,7 +529,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ considerComments: true }],
     },
@@ -521,7 +561,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ considerComments: true }],
     },
@@ -546,7 +587,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ considerComments: true, count: 1 }],
     },
@@ -561,7 +603,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -576,7 +619,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -590,7 +634,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -605,7 +650,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -624,7 +670,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -643,7 +690,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -662,7 +710,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -720,7 +769,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -734,7 +784,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
 
@@ -750,7 +801,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -765,7 +817,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -780,7 +833,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -795,7 +849,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -810,7 +865,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -825,7 +881,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -840,7 +897,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -855,7 +913,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -870,7 +929,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -890,7 +950,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
       options: [{ considerComments: true, count: 1, exactCount: true }],
     },
@@ -906,7 +967,8 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
-        parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
+        sourceType: 'module',
+        parserOptions: { ecmaVersion: 2015 },
       },
     },
     {
@@ -947,10 +1009,10 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
+        sourceType: 'module',
         parserOptions: {
           ecmaVersion: 2015,
           considerComments: true,
-          sourceType: 'module',
         },
       },
     },
@@ -965,9 +1027,9 @@ run<RuleOptions, MessageIds>({
         },
       ],
       languageOptions: {
+        sourceType: 'module',
         parserOptions: {
           ecmaVersion: 2015,
-          sourceType: 'module',
         },
       },
       options: [{ considerComments: true, count: 2 }],
