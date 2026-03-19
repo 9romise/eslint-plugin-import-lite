@@ -32,6 +32,7 @@ async function writeRulesIndex() {
   writeFileSync(resolve(RULE_DIR, 'index.ts'), index, 'utf-8')
 }
 
+const ITEMS_DEFS = /#\/items\/0\/\$defs\//g
 function writeRuleMetaDts() {
   rules.forEach(async (name) => {
     const dir = resolve(RULE_DIR, name)
@@ -47,7 +48,7 @@ function writeRuleMetaDts() {
     const prefix = pascalCase(name)
 
     const options = await Promise.all(schemas.map(async (schema, index) => {
-      schema = JSON.parse(JSON.stringify(schema).replace(/#\/items\/0\/\$defs\//g, '#/$defs/'))
+      schema = JSON.parse(JSON.stringify(schema).replace(ITEMS_DEFS, '#/$defs/'))
 
       try {
         const compiled = await compile(schema, `${prefix}Schema${index}`, {})
