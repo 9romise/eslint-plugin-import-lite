@@ -15,7 +15,7 @@ jobs:
       - name: Setup JS
         uses: sxzz/workflows/setup-js@v1
         with:
-          node-version: "lts/*"
+          node-version: 'lts/*'
 
       - name: Install ESLint 9
         run: pnpm install eslint@9
