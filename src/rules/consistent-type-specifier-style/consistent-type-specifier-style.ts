@@ -24,6 +24,13 @@ function getImportText(
   return `import type {${names.join(', ')}} from ${sourceString};`
 }
 
+// https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-3.html#stable-support-resolution-mode-in-import-types
+function hasResolutionModeAttribute(node: Tree.ImportDeclaration) {
+  return node.attributes?.some(
+    (attr) => attr.key.type === 'Literal' && attr.key.value === 'resolution-mode',
+  )
+}
+
 export default createRule<RuleOptions, MessageIds>({
   name: 'consistent-type-specifier-style',
   meta: {
@@ -53,6 +60,10 @@ export default createRule<RuleOptions, MessageIds>({
         ImportDeclaration(node) {
           if (node.importKind === 'value' || node.importKind == null) {
             // top-level value / unknown is valid
+            return
+          }
+
+          if (hasResolutionModeAttribute(node)) {
             return
           }
 
