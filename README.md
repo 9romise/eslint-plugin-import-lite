@@ -33,9 +33,9 @@ See all rules in [`src/rules`](./src/rules)
 
 I extend [my own ESLint config](https://github.com/9romise/eslint-config) from [`@antfu/eslint-config`](https://github.com/antfu/eslint-config).
 
-Recently this config dropped [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x) because it introduce built-in binary resolvers and makes it heavy.
+Recently this config dropped [`eslint-plugin-import-x`](https://github.com/un-ts/eslint-plugin-import-x) because it introduces built-in binary resolvers and makes it heavy.
 
-In a [discussion]((https://github.com/9romise/eslint-import-resolver-oxc/issues/87#issuecomment-2945162572)) about built-in resolver, the maintainer plans to keep it as dependency, which makes it impossible to lightweight the package.
+In a [discussion](https://github.com/9romise/eslint-import-resolver-oxc/issues/87#issuecomment-2945162572) about the built-in resolver, the maintainer plans to keep it as a dependency, which makes it impossible to keep the package lightweight.
 
 But there are some useful rules and [some people (including me) want to bring the plugin back](https://github.com/antfu/eslint-config/issues/720).
 
