@@ -3,7 +3,12 @@
   "type": "module",
   "version": "0.5.2",
   "packageManager": "pnpm@10.32.1",
-  "author": "Vida Xie<https://github.com/9romise>",
+  "description": "A lightweight ESLint plugin for import/export linting",
+  "author": {
+    "name": "Vida Xie",
+    "url": "https://github.com/9romise",
+    "email": "vida_2020@163.com"
+  },
   "license": "MIT",
   "homepage": "https://github.com/9romise/eslint-plugin-import-lite#readme",
   "repository": {
