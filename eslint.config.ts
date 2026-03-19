@@ -3,10 +3,6 @@ import { defineConfig } from '@vida0905/eslint-config'
 export default defineConfig({
   pnpm: true,
 }, {
-  rules: {
-    'e18e/prefer-static-regex': 'off',
-  },
-}, {
   files: ['src/rules/**/*.ts'],
   rules: {
     'no-console': 'off',
