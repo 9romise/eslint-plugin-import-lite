@@ -39,6 +39,10 @@ In a [discussion](https://github.com/9romise/eslint-import-resolver-oxc/issues/8
 
 But there are some useful rules and [some people (including me) want to bring the plugin back](https://github.com/antfu/eslint-config/issues/720).
 
+## See Also
+
+- [eslint-plugin-fast-import](https://npmx.dev/package/eslint-plugin-fast-import) - A ESLint plugin using a novel algorithm combined with the OXC Rust parser.
+
 ## Credits
 
 - [eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x) - source codes [MIT](https://github.com/un-ts/eslint-plugin-import-x/blob/master/LICENSE)

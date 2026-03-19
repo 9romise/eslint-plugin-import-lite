@@ -18,7 +18,14 @@
   "bugs": {
     "url": "https://github.com/9romise/eslint-plugin-import-lite/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "eslint",
+    "plugin",
+    "eslintplugin",
+    "eslint-plugin",
+    "import",
+    "eslint-plugin-import"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
