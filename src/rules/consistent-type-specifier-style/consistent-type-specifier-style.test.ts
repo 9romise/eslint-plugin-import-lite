@@ -116,6 +116,15 @@ run<RuleOptions, MessageIds>({
     // always valid
     //
     { code: `import type * as Foo from 'Foo';` },
+    // https://github.com/un-ts/eslint-plugin-import-x/issues/233
+    {
+      code: `import type {Foo} from 'some-package' with {'resolution-mode': 'import'};`,
+      options: ['inline'],
+    },
+    {
+      code: `import type {Foo} from 'some-package' with {'resolution-mode': 'import'};`,
+      options: ['prefer-top-level'],
+    },
   ],
   invalid: [
 
